@@ -27,6 +27,8 @@ GEM
     faraday (0.15.0)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.23)
+    font-awesome-sass (5.0.9)
+      sass (>= 3.2)
     forwardable-extended (2.6.0)
     gemoji (3.0.0)
     github-pages (183)
@@ -262,6 +264,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  font-awesome-sass
   github-pages
   jekyll-feed (~> 0.6)
   jekyll-paginate
