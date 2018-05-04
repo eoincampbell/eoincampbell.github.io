@@ -27,14 +27,15 @@ author:
   first_name: Eoin
   last_name: Campbell
 ---
-> *Generic Marketeer:* Why do we need to shorten the URLs, people just click on them. It's not like they have to memorize them; call them out to their friends
-> *Me:* Eh... no you're right, but I do need to jam them into a SMS WAPPush along with some descriptive text, so I don't have much room to play with
-> *Generic Marketeer:* Fine, as long as it doesn't impact the project deadline
+> **Generic Marketeer:** Why do we need to shorten the URLs, people just click on them. It's not like they have to memorize them; call them out to their friends
 
-Cue, my good self scurying away to find a way to bang out a private URL Shortening service in as short a time as possible. The URL Storage itself was a piece of pie. But I did stumble across some nice code while I was at it. I started out with a int-to-base64 implemenation. but the `+` & `/` characters are fugly to deal with in URLs. I tried a Hex version as well but it just didn't look bit-ly-y enough. Enter the baseAnything encoder. Just point it at any character set and it will encode/decode to that number of chars.
-The following extension methods convert longs to strings, and vice-versa
+> **Me:** Eh... no you're right, but I do need to jam them into a SMS WAPPush along with some descriptive text, so I don't have much room to play with
 
-{% highlight csharp %}
+> **Generic Marketeer:** Fine, as long as it doesn't impact the project deadline
+
+Cue, my good self scurying away to find a way to bang out a private URL Shortening service in as short a time as possible. The URL Storage itself was a piece of pie. But I did stumble across some nice code while I was at it. I started out with a int-to-base64 implemenation. but the `+` & `/` characters are fugly to deal with in URLs. I tried a Hex version as well but it just didn't look bit-ly-y enough. Enter the baseAnything encoder. Just point it at any character set and it will encode/decode to that number of chars. The following extension methods convert longs to strings, and vice-versa
+
+```
 public static string ToBase(this long input, string baseChars)
 {
     string r = string.Empty;
@@ -64,7 +65,7 @@ public static long FromBase(this string input, string baseChars)
 
     return id;
 }
-{% highlight %}
+```
 
 I've been using it against the first character set below, but you could easily tweak it to remove any **confusing** characters, or any set for that matter.
 
