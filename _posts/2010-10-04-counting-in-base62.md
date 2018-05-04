@@ -35,7 +35,7 @@ author:
 
 Cue, my good self scurying away to find a way to bang out a private URL Shortening service in as short a time as possible. The URL Storage itself was a piece of pie. But I did stumble across some nice code while I was at it. I started out with a int-to-base64 implemenation. but the `+` & `/` characters are fugly to deal with in URLs. I tried a Hex version as well but it just didn't look bit-ly-y enough. Enter the baseAnything encoder. Just point it at any character set and it will encode/decode to that number of chars. The following extension methods convert longs to strings, and vice-versa
 
-```
+``` java
 public static string ToBase(this long input, string baseChars)
 {
     string r = string.Empty;
