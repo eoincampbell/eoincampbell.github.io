@@ -47,7 +47,7 @@ This is part 1 of a 2 part post on Combinatorics in .Net</p>
 ```csharp
 var integers = new List<int> {1, 2, 3};
 
-var p = new Permutations&lt;int&gt;(integers);
+var p = new Permutations<int>(integers);
 
 foreach (var v in p)
 {
@@ -77,9 +77,9 @@ Outputs:
 
 
 ```csharp
-var integers = new List&lt;int&gt; {1, 1, 2};
+var integers = new List<int> {1, 1, 2};
 
-var p = new Permutations&lt;int&gt;(integers, GenerateOption.WithoutRepetition);
+var p = new Permutations<int>(integers, GenerateOption.WithoutRepetition);
 
 foreach (var v in p)
 {
@@ -97,9 +97,9 @@ Outputs:
 ## 3 Digit Permutations with repetition
 
 ```csharp
-var integers = new List&lt;int&gt; {1, 1, 2};
+var integers = new List<int> {1, 1, 2};
 
-var p = new Permutations&lt;int&gt;(integers, GenerateOption.WithRepetition);
+var p = new Permutations<int>(integers, GenerateOption.WithRepetition);
 
 foreach (var v in p)
 {

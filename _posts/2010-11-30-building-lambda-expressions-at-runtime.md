@@ -47,7 +47,7 @@ excerpt: Necessity is the mother of all... reasons to learn something new. So wh
 <p style="text-align: justify;">To get our list of properties they could choose from was relatively simple... Since we already had a Linq2SQL mapping of our Device table, we could just call the GetProperties method on that entity and stick the resultant collection in a ComboBox.</p>
 
 ```csharp
-Dictionary&lt;string, string&gt; returned = typeof(Device).GetProperties();
+Dictionary<string, string> returned = typeof(Device).GetProperties();
 ```
 <p style="text-align: justify;">But how could we use these string representation of object properties in a dynamic fashion. First off, lets have a look at what LINQ is actually doing. Lets take a very simple example.</p>
 

@@ -66,7 +66,8 @@ author:
 <p>After spending a few hours with it, it does make the code a little more readable & writeable, but then that's completely traded off against the lack of intellisense & syntax highlighting in this release.</p>
 <h3>Unobtrusive Javascript</h3>
 <p>This is a nice new feature of MVC 3. You can turn on unobtrusive javascript  on a per view basis or using an Application-wide configuration setting. <a href="http://en.wikipedia.org/wiki/Unobtrusive_JavaScript" title="Unobtrusive Javascript on Wikipedia">Unobtrusive Javascript</a> lets you keep a separation between your functional code ("behavior") and your structural markup & content ("presentation"). To give an example, the following snippet of Razor will generate an HTML Form with an AJAX Callback.</p>
-```xml
+
+```aspx-cs
 @model dynamic
 @using (Ajax.BeginForm("ChooseShow", "Home", 
 	new AjaxOptions()
@@ -81,9 +82,11 @@ author:
 	<input type="submit" value="Choose Show" />
 }
 ```
+
 <h3>Old School Rendering</h3>
 <p>Previously the Microsoft & MVC Ajax Libraries would render JavaScript on your the &lt;form&gt; tag like this.</p>
-```xml
+
+```html
 <form
     action="/Home/ChooseShow" 
     method="post" onclick="Sys.Mvc.AsyncForm.handleClick(this, new Sys.UI.DomEvent(event));" 
@@ -96,7 +99,9 @@ author:
         onSuccess: Function.createDelegate(this, ShowContentPanel) 
     });">
 ```
+
 <p>So lets turn on Unobtrusive Javascript in the web.config</p>
+
 ```xml
 <configuration>
   <appSettings>
@@ -104,8 +109,10 @@ author:
   </appSettings>
 </configuration>
 ```
+
 <h3>Unobstrusive Rendering</h3>
-```xml
+
+```html
 <form action="/Home/ChooseShow" 
     data-ajax="true"
     data-ajax-begin="ShowLoading"
@@ -117,5 +124,6 @@ author:
     id="form0"
     method="post">
 ```
+
 <p>The HTML footprint is much smaller than the previous. (Easier to read, smaller transmission size) and it's HTML 5 Compatible using <a href="http://dev.w3.org/html5/spec/Overview.html#embedding-custom-non-visible-data-with-the-data-attributes">Custom Data Attributes (data-*)</a></p>
 <p>Brad Wilson has a bit more info on his blog post, <a href="http://bradwilson.typepad.com/blog/2010/10/mvc3-unobtrusive-ajax.html">Unobtrusive Ajax in ASP.NET MVC 3</a>, from earlier in the week.</p>

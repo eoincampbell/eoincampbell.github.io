@@ -39,7 +39,7 @@ author:
 ```csharp
 public class SuperConsole
 {
-    public static void WriteLine&lt;T&gt;(IEnumerable&lt;T&gt; list, bool includeCarriageReturnBetweenItems =false)
+    public static void WriteLine<T>(IEnumerable<T> list, bool includeCarriageReturnBetweenItems =false)
     {
         var seperator = includeCarriageReturnBetweenItems ? ",\n" : ", ";
         var result = string.Join(seperator, list);
@@ -52,10 +52,11 @@ public class SuperConsole
 <p>The<span style="font-family: 'courier new', courier;"><strong> System.Linq.Enumerable</strong></span> type has 2 very useful static methods on it for quickly generating a sequence of items. <strong><span style="font-family: 'courier new', courier;">Enumerable.Range</span></strong> &amp; <strong><span style="font-family: 'courier new', courier;">Enumerable.Repeat</span></strong>. The Range method allows you to quickly generate a sequential list of integers from a given starting point for a given number of items.</p>
 
 ```csharp
-IEnumerable&lt;int&gt; range = Enumerable.Range(1, 10);
+IEnumerable<int> range = Enumerable.Range(1, 10);
 SuperConsole.WriteLine(range);
 //prints "1, 2, 3, 4, 5, 6, 7, 8, 9, 10"
 ```
+
 <p>So why is this useful, well you could use it to quickly generate a pre-initialised list of integers rather than new'ing up a list and then iterating over it to populate it. Or you could use it to replicate <span style="font-family: 'courier new', courier;"><b>for(;;)</b> </span>behavior. e.g.</p>
 
 ```csharp
@@ -95,7 +96,7 @@ SuperConsole.WriteLine(objects);
 
 ```csharp
 var integers = Enumerable.Range(1, 5);
-var converter = new Converter&lt;int, string&gt;(input =&gt; string.Format("{0}: ", input));
+var converter = new Converter<int, string>(input => string.Format("{0}: ", input));
 var results = integers.ToList().ConvertAll(converter);
 
 SuperConsole.WriteLine(results, true);

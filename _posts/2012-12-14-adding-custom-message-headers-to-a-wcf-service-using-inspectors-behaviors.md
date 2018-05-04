@@ -215,76 +215,87 @@ public void ApplyDispatchBehavior(ServiceDescription serviceDescription, Service
 [/csharp]</p>
 <h1 style="text-align: justify;">Adding the Custom Behavior to a WCF Service</h1>
 <p style="text-align: justify;">Behaviors can be applied to services using a special Service Behavior attribute which decorates the ServiceContract. The last step is to extend the Attribute class in our CustomHeaderInspectorBehavior class and then to decorate each of services with that attribute.</p>
-<p>[csharp]<br />
-[AttributeUsage(AttributeTargets.Class)]<br />
-public class CustomInspectorBehavior : Attribute, ... { ... }</p>
-<p>[CustomInspectorBehavior]<br />
-public class ComplexCustomHeaderService : IComplexCustomHeaderService { ... }<br />
-[/csharp]</p>
+
+```csharp
+[AttributeUsage(AttributeTargets.Class)]
+public class CustomInspectorBehavior : Attribute, ... { ... }
+[CustomInspectorBehavior]
+public class ComplexCustomHeaderService : IComplexCustomHeaderService { ... }
+```
+
 <h1 style="text-align: justify;">Configuring a WCF Client to use a specific behavior</h1>
 <p style="text-align: justify;">On the client side, I need to do a tiny bit more work. I can manually configure the Behavior on the WcfClientProxy every time I instantiate it but this is extra bloat and eventually I'll forget to set it somewhere and lose my behavior functionality.</p>
-<p>[csharp]<br />
-using(var client = new ComplexCustomHeaderServiceClient()) {<br />
-    client.ChannelFactory.Endpoint.Behaviors.Add(new CustomHeaderInspectorBehavior());<br />
-}<br />
-[/csharp]</p>
+
+```csharp
+using(var client = new ComplexCustomHeaderServiceClient()) {
+    client.ChannelFactory.Endpoint.Behaviors.Add(new CustomHeaderInspectorBehavior());
+}
+```
+
 <p style="text-align: justify;">Instead I'd prefer to be able to set this once in configuration and never have to worry about it again. I can achieve this by using a BehaviorExtension Element as follows and adding it to my application configuraiton file.</p>
-<p>[csharp]<br />
-public class CustomInspectorBehaviorExtension : BehaviorExtensionElement<br />
-{<br />
-    protected override object CreateBehavior()<br />
-    {<br />
-        return new CustomInspectorBehavior();<br />
-    }<br />
-    public override Type BehaviorType<br />
-    {<br />
-        get { return typeof (CustomInspectorBehavior); }<br />
-    }<br />
-}<br />
-[/csharp]</p>
+
+```csharp
+public class CustomInspectorBehaviorExtension : BehaviorExtensionElement
+{
+    protected override object CreateBehavior()<
+    {
+        return new CustomInspectorBehavior();
+    }
+    public override Type BehaviorType
+    {
+        get { return typeof (CustomInspectorBehavior);}
+    }
+}
+```
+
 <p style="text-align: justify;">And below is the equivalent configuration file.</p>
-<p>[xml highlight="4-5,11-12,22-23"]<br />
-    &lt;system.serviceModel&gt;<br />
-      &lt;behaviors&gt;<br />
-        &lt;endpointBehaviors&gt;<br />
-          &lt;behavior name=&quot;CustomInspectorBehavior&quot;&gt;<br />
-            &lt;CustomInspectorBehavior /&gt;<br />
-          &lt;/behavior&gt;<br />
-        &lt;/endpointBehaviors&gt;<br />
-      &lt;/behaviors&gt;<br />
-      &lt;extensions&gt;<br />
-        &lt;behaviorExtensions&gt;<br />
-          &lt;add name=&quot;CustomInspectorBehavior&quot;<br />
-               type=&quot;WCFCustomHeaderDemo.Lib.Extensions.CustomInspectorBehaviorExtension,WCFCustomHeaderDemo.Lib&quot; /&gt;<br />
-        &lt;/behaviorExtensions&gt;<br />
-      &lt;/extensions&gt;<br />
-        &lt;bindings&gt;<br />
-            &lt;basicHttpBinding&gt;<br />
-                &lt;binding name=&quot;BasicHttpBinding_ISimpleCustomHeaderService&quot; /&gt;<br />
-                &lt;binding name=&quot;BasicHttpBinding_IComplexCustomHeaderService&quot; /&gt;<br />
-            &lt;/basicHttpBinding&gt;<br />
-        &lt;/bindings&gt;<br />
-        &lt;client&gt;<br />
-            &lt;endpoint address=&quot;http://localhost/TestService/ComplexCustomHeaderService.svc&quot;<br />
-                behaviorConfiguration=&quot;CustomInspectorBehavior&quot;<br />
-				binding=&quot;basicHttpBinding&quot;<br />
-                bindingConfiguration=&quot;BasicHttpBinding_IComplexCustomHeaderService&quot;<br />
-                contract=&quot;ComplexCustomHeaderService.IComplexCustomHeaderService&quot;<br />
-                name=&quot;BasicHttpBinding_IComplexCustomHeaderService&quot; /&gt;<br />
-        &lt;/client&gt;<br />
-    &lt;/system.serviceModel&gt;<br />
-[/xml]</p>
+
+```xml
+    <system.serviceModel>
+      <behaviors>
+        <endpointBehaviors>
+          <behavior name="CustomInspectorBehavior">
+            <CustomInspectorBehavior />
+          </behavior>
+        </endpointBehaviors>
+      </behaviors>
+      <extensions>
+        <behaviorExtensions>
+          <add name="CustomInspectorBehavior"
+               type="WCFCustomHeaderDemo.Lib.Extensions.CustomInspectorBehaviorExtension,WCFCustomHeaderDemo.Lib" />
+        </behaviorExtensions>
+      </extensions>
+        <bindings>
+            <basicHttpBinding>
+                <binding name="BasicHttpBinding_ISimpleCustomHeaderService" />
+                <binding name="BasicHttpBinding_IComplexCustomHeaderService" />
+            </basicHttpBinding>
+        </bindings>
+        <client>
+            <endpoint address="http://localhost/TestService/ComplexCustomHeaderService.svc"
+                behaviorConfiguration="CustomInspectorBehavior"
+				binding="basicHttpBinding"
+                bindingConfiguration="BasicHttpBinding_IComplexCustomHeaderService"
+                contract="ComplexCustomHeaderService.IComplexCustomHeaderService"
+                name="BasicHttpBinding_IComplexCustomHeaderService" />
+        </client>
+    </system.serviceModel>
+```
+
 <h1 style="text-align: justify;">Calling our Client</h1>
 <p>Finally, we can call our client and test to see if our Server side application can see the headers being submitted and echo them back.</p>
-<p>[csharp]<br />
-using(var client = new ComplexCustomHeaderServiceClient())<br />
-{<br />
-    ClientCustomHeaderContext.HeaderInformation.WebNodeId = 465;<br />
-    ClientCustomHeaderContext.HeaderInformation.WebSessionId = Guid.NewGuid();<br />
-    ClientCustomHeaderContext.HeaderInformation.WebUserId = &quot;joe.bloggs&quot;;<br />
-    System.Console.WriteLine(client.DoWork());<br />
-}<br />
-[/csharp]</p>
-<p>[caption id="attachment_774" align="aligncenter" width="510"]<a href="http://trycatch.me/blog/wp-content/uploads/2012/12/result.png"><img class=" wp-image-774 " alt="Wcf Header Demo Result" src="{{ site.baseurl }}/assets/result.png" width="510" height="147" /></a> WCF Header Demo Result[/caption]</p>
+
+```csharp
+using(var client = new ComplexCustomHeaderServiceClient())
+{
+    ClientCustomHeaderContext.HeaderInformation.WebNodeId = 465;
+    ClientCustomHeaderContext.HeaderInformation.WebSessionId = Guid.NewGuid();
+    ClientCustomHeaderContext.HeaderInformation.WebUserId = "joe.bloggs"
+    System.Console.WriteLine(client.DoWork());
+}
+
+```
+
+<p><a href="http://trycatch.me/blog/wp-content/uploads/2012/12/result.png"><img class=" wp-image-774 " alt="Wcf Header Demo Result" src="{{ site.baseurl }}/assets/result.png" width="510" height="147" /></a> WCF Header Demo Result</p>
 <p>Excellent.</p>
 <p><em>~Eoin C</em></p>

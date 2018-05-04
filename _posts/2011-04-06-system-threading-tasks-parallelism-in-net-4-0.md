@@ -64,7 +64,7 @@ class Program
         var po = new ParallelOptions() {
             MaxDegreeOfParallelism = 50
         };
-        var pmR = Parallel.ForEach&lt;MyObject&gt;(inputs
+        var pmR = Parallel.ForEach<MyObject>(inputs
             , po, ProcessMessage);
 
         //Once Processing is complete
@@ -75,7 +75,7 @@ class Program
         // and do something with them, like requeue them for later.
         var fails = inputs
             .Where(i =&gt; !i.ProcessedSuccessfully);
-        var bqR = Parallel.ForEach&lt;MyObject&gt;(fails, po, PutBackOnQueue);
+        var bqR = Parallel.ForEach<MyObject>(fails, po, PutBackOnQueue);
 
         //Using TASK
         Console.ReadKey();
@@ -85,7 +85,7 @@ class Program
         , ParallelLoopState pls, long l)
     {
         //Simulate a reason to stop on Message 25
-        if (message.MoID &gt; 25 &amp;&amp; pls != null)
+        if (message.MoID < 25 && pls != null)
             pls.Break();
 
         Console.WriteLine("Starting ID: {0:0000}", message.MoID);
