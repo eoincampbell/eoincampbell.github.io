@@ -1,5 +1,5 @@
 title:            try { } catch { } me
-description:      Eoin's Blog
+description:      A coding blog... mostly
 
 # put your disqus here
 disqus_shortname: trycatchme
@@ -20,18 +20,22 @@ url: https://eoincampbell.github.io
 menu:
   - title: 'Home'
     url: '/'
-  - title: 'Tags'
-    url: '/tags'
+  - title: 'About'
+    url: '/about/'
+  - title: 'Development'
+    url: '#'
   - title: 'Categories'
-    url: '/categories'
-    type: 'categories'
-  - title: 'Favorites'
+    url: '/categories/'
+    type: categories
+  - title: 'Tags'
+    url: '/tags/'
+  - title: 'Development'
+    url: '#'
+  - title: 'Links'
     url: '#'
     submenu:
-      - title: 'Code Highlighter'
-        url: '/intro/code-highlighting-post/'
-      - title: 'Sample Post'
-        url: '/intro/sample-post/'
+      - title: 'Flickr'
+        url: 'http://www.flickr.com/photos/eoincampbell/sets/'
 
 # Owner/author information
 owner:
@@ -55,8 +59,8 @@ social:
     url: "https://github.com/eoincampbell"
   - title: "linkedin"
     url: "https://br.linkedin.com/in/eoincampbell"
-  - title: "stackoverflow"
-    url: "#"
+  - title: "stack-overflow"
+    url: "https://stackoverflow.com/users/30155/eoin-campbell"
 
 # Background image to be tiled on all pages
 background:

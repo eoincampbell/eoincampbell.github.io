@@ -4,33 +4,10 @@ title: About
 share: true
 ---
 
-# Neo-HPSTR Jekyll Theme
+By day, I’m Senior Technical Architect for ChannelSight, a advertising technology company based in Dublin, Ireland.
 
-Neo-HPSTR Jekyll is a responsive and modern blog template.
+This blog is somewhere I can scribble my musings on Coding, Software Development, Design, Architecture, Maths, Puzzles and other things that makes my brain tick.
 
-# Live Demo
+I live in Dublin, Ireland with my Wife and 2 kids. I try to write code at some-what regular intervals. It usually ends up on GitHub, Stackoverflow.
 
-You can see it running [here](http://blog.rhesoft.com/) and [here](http://aronbordin.com/neo-hpstr-jekyll-theme/).
-
-
-## What Neo-HPSTR brings to the table:
-
-* Modern design.
-* Responsive templates for post, page, and post index `_layouts`. Looks great on mobile, tablet, and desktop devices.
-* Gracefully degrades in older browsers. Compatible with Internet Explorer 8+ and all modern browsers.  
-* Sweet topbar animated menu with support for drop-downs.
-* Optional [Disqus](http://disqus.com) comments and social sharing links.
-* [Open Graph](https://developers.facebook.com/docs/opengraph/) and [Twitter Cards](https://dev.twitter.com/docs/cards) support for a better social sharing experience.
-* Simple [custom 404 page](http://mmistakes.github.io/hpstr-jekyll-theme/404.html) to get you started.
-* Stylesheets for Pygments and Coderay [syntax highlighting](http://mmistakes.github.io/hpstr-jekyll-theme/code-highlighting-post/) to make your code examples look snazzy
-* Author panel, with social links
-* Read more tag support(similar with Wordpress ).
-
-![Preview](http://aronbordin.com/images/neo-hpstr-jekyll-theme-preview.png)
-
-
----
-
-## Getting Started
-
-Neo-HPSTR takes advantage of Sass and data files to make customizing easier. These features require Jekyll 2.x and will not work with older versions of Jekyll.
+I enjoy photography & try and get out with my camera as much as possible.
