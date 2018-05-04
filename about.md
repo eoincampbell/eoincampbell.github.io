@@ -1,8 +1,12 @@
 ---
 layout: page
 title: About
-share: true
+share: false
+comments: false
 ---
+
+
+###About Me
 
 By day, I’m Senior Technical Architect for ChannelSight, a advertising technology company based in Dublin, Ireland.
 
