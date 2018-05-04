@@ -1,5 +1,6 @@
 .highlight {
 	margin-bottom: 1.5em;
+	line-height: 1.25em!important;
 	@include font(12);
 	color: #d0d0d0;
 	border: 1px solid darken($body-color, 5);
@@ -8,7 +9,8 @@
 	pre {
 		position: relative;
 		margin: 0;
-		padding: 1em;
+		padding: 0.25em!important;
+		line-height: 1.25em!important;
 	}
 	.lineno { padding-right: 24px; color: #8f908a;}
 	.hll { background-color: #49483e }

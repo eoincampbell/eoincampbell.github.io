@@ -35,7 +35,7 @@ author:
 
 Cue, my good self scurying away to find a way to bang out a private URL Shortening service in as short a time as possible. The URL Storage itself was a piece of pie. But I did stumble across some nice code while I was at it. I started out with a int-to-base64 implemenation. but the `+` & `/` characters are fugly to deal with in URLs. I tried a Hex version as well but it just didn't look bit-ly-y enough. Enter the baseAnything encoder. Just point it at any character set and it will encode/decode to that number of chars. The following extension methods convert longs to strings, and vice-versa
 
-``` java
+{% highlight csharp linenos %}
 public static string ToBase(this long input, string baseChars)
 {
     string r = string.Empty;
@@ -51,6 +51,7 @@ public static string ToBase(this long input, string baseChars)
     return r;
 }
 
+
 public static long FromBase(this string input, string baseChars)
 {
     int srcBase = baseChars.Length;
@@ -65,11 +66,11 @@ public static long FromBase(this string input, string baseChars)
 
     return id;
 }
-```
+{% endhighlight %}
 
 I've been using it against the first character set below, but you could easily tweak it to remove any **confusing** characters, or any set for that matter.
 
-``` csharp
+{% highlight csharp linenos %}
 private static string ALPHANUMERIC =
     "0123456789" +
     "ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
@@ -81,6 +82,6 @@ private static string ALPHANUMERIC_ALT =
     "ABCDEFGHJKLMNPRSTUVWXYZ" +
     "abcdefghjkmnpqrstuvwxyz";
 }
-```
+{% highlight csharp linenos %}
 
 Now all I have to do is go write a Math Engine for it ;-)
