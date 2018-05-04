@@ -20,11 +20,15 @@ url: https://eoincampbell.github.io
 menu:
   - title: 'Home'
     url: '/'
-  - title: 'About'
-    url: '/about/'
-  - title: 'Categories'
-    url: '/categories/'
-    type: categories
+  - title: 'Posts'
+    url: '#'
+    submenu:
+      - title: 'by Year'
+        url: '/posts/'
+      - title: 'by Category'
+        url: '/categories/'
+      - title: 'by Tag'
+        url: '/tags/'
   - title: 'Dev'
     url: '#'
   - title: 'Links'
@@ -32,7 +36,9 @@ menu:
     submenu:
       - title: 'Flickr'
         url: 'http://www.flickr.com/photos/eoincampbell/sets/'
-
+  - title: 'About'
+    url: '/about/'
+  
 # Owner/author information
 owner:
   name:           Eoin Campbell

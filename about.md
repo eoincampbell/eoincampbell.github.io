@@ -1,9 +1,9 @@
 ---
 layout: page
 title: About
-share: false
 comments: false
-float_share: false
+float_share: true
+share: true
 ---
 
 
