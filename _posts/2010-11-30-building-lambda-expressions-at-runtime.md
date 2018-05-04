@@ -45,58 +45,77 @@ excerpt: Necessity is the mother of all... reasons to learn something new. So wh
 <p style="text-align: justify;">By the way, if there's a nicer way to do this, I'd love to know about it.</p>
 <p><!--more--></p>
 <p style="text-align: justify;">To get our list of properties they could choose from was relatively simple... Since we already had a Linq2SQL mapping of our Device table, we could just call the GetProperties method on that entity and stick the resultant collection in a ComboBox.</p>
-<pre class="brush: csharp; wrap-lines: false;"> Dictionary&lt;string, string&gt; returned = typeof(Device).GetProperties();</pre>
+
+```csharp
+Dictionary&lt;string, string&gt; returned = typeof(Device).GetProperties();
+```
 <p style="text-align: justify;">But how could we use these string representation of object properties in a dynamic fashion. First off, lets have a look at what LINQ is actually doing. Lets take a very simple example.</p>
-<pre class="brush: csharp; wrap-lines: false;"> var results = dataContext.Devices.Where(
-   device =&gt; device.DeviceManufacturerId == 123
-);</pre>
+
+```csharp
+var results = dataContext.Devices.Where(device => device.DeviceManufacturerId == 123);
+```
+
 <p style="text-align: justify;">It doesn't really lend itself nicely to dynamically altering the where clause at runtime. Lucky for us, the query above is really just syntactic sugar and the System.Linq namespace provides us with everything we need to concoct our own lambdas at runtime.</p>
 <h4>Query Preparation</h4>
 <p style="text-align: justify;">We want to return a queryable collection of Device Objects. Since the lambda execution is delayed until we attempt to interact with the results, we can safely build up our query in successive steps.</p>
-<pre class="brush: csharp; wrap-lines: false;">IQueryable&lt;Device&gt; devices dataContext.Devices;</pre>
+
+```csharp
+IQueryable<Device> devices dataContext.Devices;
+```
 <p style="text-align: justify;">Next we created a <code>ParameterExpression</code> to reference our properties in our Dynamic Lambda.</p>
-<pre class="brush: csharp; wrap-lines: false;">
+
+```csharp
 ParameterExpression parameterExpression = Expression.Parameter(
    typeof(Device), 
    "device"
 );
-</pre>
+```
+
 <p style="text-align: justify;">This is equivalent to the <em><strong>"device =&gt;"</strong></em> portion of the query.</p>
 <p style="text-align: justify;">We also added our good old "WHERE 1 = 1" hack. Since our UI allowed a user to search without applying any filter, we didn't want to have to worry about testing for a pre-existing clause before adding the next conjunction predicate.</p>
-<pre class="brush: csharp; wrap-lines: false;">
+
+```csharp
 Expression whereClauseExpression = Expression.Equal(
    Expression.Constant(1), 
    Expression.Constant(1)
 );
-</pre>
+```
+
 <p style="text-align: justify;">Right now our query looks like this and any user generated filters can be easily AND'd on</p>
-<pre class="brush: csharp; wrap-lines: false;">
+
+```csharp
 var results = dataContext.Devices.Where(
-   device =&gt; 1 == 1
+   device => 1 == 1
 );
-</pre>
+```
+
 <h4>The Operators</h4>
 <p style="text-align: justify;">Since the operations that the user was going to use in our UI were well defined, we opted to simplify this part of the system.<br />
 numbers: ==, &lt;, &gt;, &lt;=, &gt;=, !=<br />
 strings: ==, contains<br />
 bools: ==, !=</p>
 <p style="text-align: justify;">We created a delegate to represent an Expression Operator</p>
-<pre class="brush: csharp; wrap-lines: false;">
+
+```csharp
 delegate BinaryExpression OperatorDelegate(
    Expression left, 
    Expression right
 );
-</pre>
+```
+
 <p style="text-align: justify;">And then mapped the users selections to the actual operators.</p>
-<pre class="brush: csharp; wrap-lines: false;">
+
+```csharp
 Dictionary ops = new Dictionary();
 ops.Add("==", Expression.Equal);
 //etc...
-</pre>
+```
+
 <h4>The dynamagic bit</h4>
 <p style="text-align: justify;">In order to build a where clause you need 3 things. The property your testing against. The value your testing for. And the operator your applying to your test. We already have our list of known properties from earlier in our combo box. We can also easily find out the type of those properties and hence limit the operations we want the user to be able to use. Finally depending on the property type, we can choose to update the UI and allow the user to type a value in a box for a string/int, or select a radiobutton for a bool etc...</p>
 <p style="text-align: justify;">once we've obtained these 3 pieces of info, we can build our clause as follows.</p>
-<pre class="brush: csharp; wrap-lines: false;">
+
+```csharp
 string _prop = "DeviceManufacturerId";    //obtained from combobox
 string _value = "123";        //int value obtained through textbox
 string _operator = "=="; //taken from user selected operator on UI
@@ -128,12 +147,14 @@ public static Expression GetNextExpression(ParameterExpression pe,
    operatorMethd =  ops[_operator];
    return operatorMethod(left, right);
 }
-</pre>
+```
+
 <p style="text-align: justify;">This is all equivalent to <strong><em>"device.DeviceManufacturerId == 123"</em></strong> portion of original query </p>
 <h4>Putting it all together</h4>
 <p style="text-align: justify;">Finally, now that we have our expression, we can iterate through the rest of the user generated search filters and join them together into one clause.<br />
 and execute our lambda</p>
-<pre class="brush: csharp; wrap-lines: false;">
+
+```csharp
 foreach(var in in SomeCollectionOfUserFilters)
 {
    //Conjoin existing + next expressions
@@ -149,13 +170,13 @@ MethodCallExpression whereCall = Expression.Call(
    "Where",
    new Type[] { devices.ElementType },
    devices.Expression,
-   Expression.Lambda&lt;Func&lt;Device, bool&gt;&gt;(
+   Expression.Lambda<Func<Device, bool>>(
       whereClauseExpression, 
       parameterExpression
    )
 );
 
-IQueryable&lt;Device&gt; results = devices.Provider.CreateQuery&lt;Device&gt;(whereCall);
-</pre>
+IQueryable<Device> results = devices.Provider.CreateQuery<Device>(whereCall);
+```
 <p>Awesome!</p>
 <p><em>~Eoin Campbell</em></p>

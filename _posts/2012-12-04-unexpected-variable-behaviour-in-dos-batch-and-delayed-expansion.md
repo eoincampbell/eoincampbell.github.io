@@ -30,14 +30,18 @@ author:
   last_name: Campbell
 ---
 <p style="text-align: justify;">What would you expect the following piece of Code to print. if the directory 'A' doesn't exist</p>
-<pre class="brush:text;">@ECHO OFF
+
+```
+@ECHO OFF
 IF '1'=='1' (
         CD a
         ECHO %ERRORLEVEL%
 )
 
 CD a
-ECHO %ERRORLEVEL%</pre>
+ECHO %ERRORLEVEL%
+```
+
 <div></div>
 <div><a href="http://trycatch.me/blog/wp-content/uploads/2012/12/cmd.jpg"><img class=" wp-image-739 aligncenter" title="cmd" src="{{ site.baseurl }}/assets/cmd.jpg" alt="" width="543" height="227" /></a></div>
 <div></div>
@@ -54,7 +58,9 @@ ECHO %ERRORLEVEL%</pre>
 <p style="text-align: justify;">Now our script looks like this, and behaves as expected.</p>
 <h1 style="text-align: justify;">Working Script</h1>
 </div>
-<pre class="brush:text;">@ECHO OFF
+
+```
+@ECHO OFF
 REM Enable Delayed Expansion
 setlocal enabledelayedexpansion
 IF '1'=='1' (
@@ -64,6 +70,8 @@ IF '1'=='1' (
 )
 
 CD a
-ECHO %ERRORLEVEL%</pre>
+ECHO %ERRORLEVEL%
+```
+
 <div>For when powershell just isn't retro enough ;-)<br />
 <em>~Eoin C</em></div>

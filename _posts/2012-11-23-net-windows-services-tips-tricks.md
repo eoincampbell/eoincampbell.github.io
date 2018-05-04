@@ -74,6 +74,7 @@ InstallUtil.exe /u DemoWindowsService.exe[/text]</p>
 </ol>
 <h1>Using Debugger.Launch &amp; Debugger.Break</h1>
 <p style="text-align: justify;">Another option available to trigger debugging is to embed calls to the Debugger directly in your code. These calls could be surrounded by <em>Conditional</em> attributes to prevent Debug Launch statements leaking into release versions of code.</p>
+
 ```csharp
 protected override void OnStart(string[] args)
         {
@@ -107,25 +108,29 @@ protected override void OnStart(string[] args)
 <p style="text-align: justify;">[notice]Unfortunately it would appear that this doesn't work in Windows 8. Microsoft have slowly been phasing out the ability of Windows Services to run in Interactive mode and interact with the desktop. Since the Debugger.Launch statement needs to load a GUI for the user to interact with, the Windows Service would appear to hang on this statement. [/notice]</p>
 <h1 style="text-align: justify;">Launch Windows Service with F5</h1>
 <p style="text-align: justify;">What would be very helpful is if we could just launch our application from within the Debugger as needed. Well it turns out we can by conditionally launching the service using the ServiceBase.Run() method or by just launching it as a regular instantiated class.</p>
-<pre class="brush:csharp;highlight: [7];">    static class Program
-    {
-        static void Main(string [] args)
-        {
-            var service = new DemoService();
 
-            if (Debugger.IsAttached)
-            {
-                service.InteractiveStart(args);
-                Console.WriteLine("Press any key to stop!");
-                Console.Read();
-                service.InteractiveStop();
-            }
-            else
-            {
-                ServiceBase.Run(service);
-            }
+```csharp
+static class Program
+{
+    static void Main(string [] args)
+    {
+        var service = new DemoService();
+
+        if (Debugger.IsAttached)
+        {
+            service.InteractiveStart(args);
+            Console.WriteLine("Press any key to stop!");
+            Console.Read();
+            service.InteractiveStop();
         }
-    }</pre>
+        else
+        {
+            ServiceBase.Run(service);
+        }
+    }
+}
+```
+
 <p style="text-align: justify;">Now if I press F5, the application entry point will check if the application is in Debug Mode (Debugger Attached) and if so will simply launch the application as a console application. In order to get this to work I've had to make a few small changes.</p>
 <ol>
 <li>Go to the Project Properties screen &amp; change the application type from "Windows Application" to "Console Application"</li>
@@ -135,58 +140,70 @@ protected override void OnStart(string[] args)
 <div></div>
 <h1>Command Line Switch Driven Behaviour</h1>
 <p style="text-align: justify;">Relying on the Debugger being attached is all well and good but what if I just want to run my application optionally in stand-alone mode. We could extend the runtime condition from the last code snippet to also test whether the application is running in InteractiveMode. But I think I'd prefer a little more power so I've added a command line switch to create this behavior. Now I have the option to Install from the command line using InstallUtil, run from the command line interactively, and I can set a startup switch argument in Project Properties -&gt; Debug -&gt; Start Options to run the application in Console mode from the IDE.</p>
-<pre class="brush:csharp;highlight: [7];">    static class Program
-    {
-        static void Main(string [] args)
-        {
-            var service = new DemoService();
 
-            if (args.Any() &amp;&amp; args[0].ToLowerInvariant() == "--console")
-            {
-                RunInteractive(service,args);
-            }
-            else
-            {
-                ServiceBase.Run(service);
-            }
-        }
-
-        private static void RunInteractive(DemoService service, string [] args)
-        {
-            service.InteractiveStart(args);
-            Console.WriteLine("Press any key to stop!");
-            Console.Read();
-            service.InteractiveStop();
-        }
-    }</pre>
-<h1 style="text-align: justify;">Self Managed Installation</h1>
-<p style="text-align: justify;">My service is becoming more self-sufficient and useful but I still have this external dependency on InstallUtil. Wouldn't it be great if I could just drop my application on a server and have it install itself. Enter the <em>ManagedInstallerClass</em></p>
-<pre class="brush:csharp;highlight: [11,14];">    static void Main(string [] args)
+```csharp
+static class Program
+{
+    static void Main(string [] args)
     {
         var service = new DemoService();
-        var arguments = string.Concat(args);
-        switch(arguments)
+
+        if (args.Any() &amp;&amp; args[0].ToLowerInvariant() == "--console")
         {
-            case "--console":
-                RunInteractive(service,args);
-                break;
-            case "--install":
-                ManagedInstallerClass.InstallHelper(new [] { Assembly.GetExecutingAssembly().Location });
-                break;
-            case "--uninstall":
-                ManagedInstallerClass.InstallHelper(new [] { "/u", Assembly.GetExecutingAssembly().Location });
-                break;
-            default:
-                ServiceBase.Run(service);
-                break;
+            RunInteractive(service,args);
         }
-    }</pre>
+        else
+        {
+            ServiceBase.Run(service);
+        }
+    }
+
+    private static void RunInteractive(DemoService service, string [] args)
+    {
+        service.InteractiveStart(args);
+        Console.WriteLine("Press any key to stop!");
+        Console.Read();
+        service.InteractiveStop();
+    }
+}
+```
+
+<h1 style="text-align: justify;">Self Managed Installation</h1>
+<p style="text-align: justify;">My service is becoming more self-sufficient and useful but I still have this external dependency on InstallUtil. Wouldn't it be great if I could just drop my application on a server and have it install itself. Enter the <em>ManagedInstallerClass</em></p>
+
+```csharp
+static void Main(string [] args)
+{
+    var service = new DemoService();
+    var arguments = string.Concat(args);
+    switch(arguments)
+    {
+        case "--console":
+            RunInteractive(service,args);
+            break;
+        case "--install":
+            ManagedInstallerClass.InstallHelper(new [] { Assembly.GetExecutingAssembly().Location });
+            break;
+        case "--uninstall":
+            ManagedInstallerClass.InstallHelper(new [] { "/u", Assembly.GetExecutingAssembly().Location });
+            break;
+        default:
+            ServiceBase.Run(service);
+            break;
+    }
+}
+```
+
 <p style="text-align: justify;">If you want to simplify matters even further, you can modify your ProjectInstaller.Designer.cs file and specify that the Service should be of type AutomaticStart</p>
-<pre class="brush:csharp;highlight: [5];">    // 
-    // serviceInstaller1
-    // 
-    this.serviceInstaller1.ServiceName = "DemoWindowsService";
-    this.serviceInstaller1.StartType = ServiceStartMode.Automatic;</pre>
+
+```csharp
+// 
+// serviceInstaller1
+// 
+this.serviceInstaller1.ServiceName = "DemoWindowsService";
+this.serviceInstaller1.StartType = ServiceStartMode.Automatic;
+```
+
 <h1 style="text-align: justify;">InstallUtil Install-Time Configuration</h1>
 <p style="text-align: justify;">One final thing you might find useful is the ability to query values from your configuration file when using Intsall Util. The problem here is that the AppSettings collection during installation is not the collection in the service.config but the collection in the InstallUtil app.config. Have a read of the following link for getting access to your own config at install time (e.g. in order to install with Default Supplied UserName &amp; Password).</p>
 <p style="text-align: justify;"><a href="http://trycatch.me/installutil-windows-services-projectinstallers-with-app-config-settings/">http://trycatch.me/installutil-windows-services-projectinstallers-with-app-config-settings/</a></p>

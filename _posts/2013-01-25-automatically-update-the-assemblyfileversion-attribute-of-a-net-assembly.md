@@ -44,21 +44,27 @@ author:
 <p style="text-align: justify;">[important]Enter the <a title="Update-AssemblyFileVersion.ps1 on Github" href="https://github.com/eoincampbell/powershell-scripts/blob/master/Update-AssemblyFileVersion.ps1" target="_blank">Update-AssemblyFileVersion.ps1</a> file.[/important]</p>
 <p style="text-align: justify;">This powershell script, (<a title="Automatically Set the AssemblyFileVersion for Visual Studio Projects" href="http://blog.davidjwise.com/2012/07/12/automatically-set-the-assemblyfileversion-for-visual-studio-projects/" target="_blank">heavily borrowed from David J Wise's article</a>), runs as a pre-build command on a .NET Project. Simply point the command at an assembly info file, (or GlobalAssemblyInfo.cs if you're following <a title="Global Assembly Versioning Strategy &amp; Development Workflows for .NET Assemblies" href="http://trycatch.me/global-assembly-versioning-strategy-development-workflows-for-net-assemblies/" target="_blank">my suggested versioning tactics</a>)  and ta-da, automatically updating AssemblyFileVersions.</p>
 <p style="text-align: justify;">The Build component of the version number will be set using the following formula based on a daycount since the year 2000.</p>
-<pre class="brush:plain;">
+
+```
 # Build = (201X-2000)*366 + (1==>366)
 #
     $build = [int32](((get-date).Year-2000)*366)+(Get-Date).DayOfYear
-&nbsp;
-</pre>
+```
+
 <p style="text-align: justify;">The Revision component of the version number will be using the following formula based on seconds in the current day.</p>
-<pre class="brush:plain;">
+
+```
 # Revision = (1==>86400)/2 # .net standard
 #
     $revision = [int32](((get-date)-(Get-Date).Date).TotalSeconds / 2)
-&nbsp;
-</pre>
+``` 
+
 <p style="text-align: justify;">The Major &amp; Minor components are not set to update although they could be. Simply add the following command to your Pre-Build event and you're all set.</p>
-<pre class="brush:plain;">%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe 
+
+```
+%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe 
     -File "C:\Path\To\Update-AssemblyFileVersion.ps1"  
-    -assemblyInfoFilePath "$(SolutionDir)\Project\Properties\AssemblyInfo.cs"</pre>
+    -assemblyInfoFilePath "$(SolutionDir)\Project\Properties\AssemblyInfo.cs"
+```
+
 <p><em>~Eoin C</em></p>

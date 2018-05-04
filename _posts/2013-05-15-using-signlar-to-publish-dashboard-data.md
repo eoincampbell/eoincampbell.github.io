@@ -42,11 +42,17 @@ author:
 <p>&nbsp;</p>
 <div>[important]The completed solution can be found on GitHub at <a href="https://github.com/eoincampbell/signalr-processor-demo">https://github.com/eoincampbell/signalr-processor-demo</a> [/important]</div>
 <p>First things first we'll need a bare bones web application which we can pull in the relevant nuget packages into. I started with a basic empty web application running under .NET 4.5. Installing the signlar &amp; highcharts packages is a breeze. Open up the PowerShell Nuget Console and run the following commands. HighCharts gets installed as a solution level package so you'll need to manually copy the relevant JavaScript files to your scripts directory in your application.</p>
-<pre class="brush:text;">Install-Package HighCharts
-Install-Package Microsoft.AspNet.SignalR</pre>
+
+```
+Install-Package HighCharts
+Install-Package Microsoft.AspNet.SignalR
+```
+
 <h2>The Hub</h2>
 <p>Signalr relies on a "Hub" to push data back to all the connected Clients. I've created a "ProcessorDataHub" which implements the Signalr Base Hub to manage this process. It contains a constructor for Initializing a static instance of my ProcessorTicker class, and a start method to start the thread within the ticker. The HubName attribute specifies the name which the hub will be accessible by on the Javascript side.</p>
-<pre class="brush:csharp;">[HubName("processorTicker")]
+
+```csharp
+[HubName("processorTicker")]
 public class ProcessorDataHub : Hub
 {
     private readonly ProcessorTicker _ticker;
@@ -66,19 +72,28 @@ public class ProcessorDataHub : Hub
 <h2>The ProcessorTicker</h2>
 <p>The heavy lifting is then done by the ProcessorTicker. This is instantiated with a reference to the Clients object, a HubConnectionContext which contains dynamic objects allowing you to push notifications to some or all connected client side callers. The implementation is fairlly simple using a System.Thread.Timer which reads the current processor level from a peformance counter once per second, and Broadcasts that value to the client side.</p>
 <p>Since the Clients.All connection is dynamic, calling "updateCpuUsage" on this object will work at runtime, so long as the relevant client side wiring up to that expected method has been done correctly.</p>
-<pre class="brush:csharp;">Clients.All.updateCpuUsage(percentage);</pre>
+```csharpClients.All.updateCpuUsage(percentage);</pre>
 <h2>The Client Side</h2>
 <p>One change since the previous version of SignalR is the requirement for the developer to manually &amp; explicity wireup the dynamically generated Javascript endpoint where SignalR creates it's javascript. This can be done on Application Start by calling the RouteTable..Routes.MapHubs() method</p>
-<pre class="brush:csharp;">protected void Application_Start(object sender, EventArgs e)
+
+```csharp
+protected void Application_Start(object sender, EventArgs e)
 {
 RouteTable.Routes.MapHubs();
-}</pre>
+}
+```
 <p>Finally we're ready to consume these published messages on our Client Page. Signlar requires the following javascript includes in the Head Section of your page.</p>
-<pre class="brush:csharp;">&lt;script type="text/javascript" src="/Signalr/Scripts/jquery-1.6.4.js"&gt;&lt;/script&gt;
-&lt;script type="text/javascript" src="/Signalr/Scripts/jquery.signalR-1.1.0-beta1.js"&gt;&lt;/script&gt;
-&lt;script type="text/javascript" src="/Signalr/signalr/hubs"&gt;&lt;/script&gt;</pre>
+
+```xml
+<script type="text/javascript" src="/Signalr/Scripts/jquery-1.6.4.js"></script>
+<script type="text/javascript" src="/Signalr/Scripts/jquery.signalR-1.1.0-beta1.js"></script>
+<script type="text/javascript" src="/Signalr/signalr/hubs"></script>
+```
+
 <p>With those inplace, we wire up our own custom Javascript function to access our ProcessorTicker, start the Hub on a button click, and begin receiving and processing the</p>
-<pre class="brush:csharp;">    &lt;script type="text/javascript"&gt;
+
+```xml
+<script type="text/javascript">
     $(function () {
         var ticker = $.connection.processorTicker;
 
@@ -104,7 +119,9 @@ RouteTable.Routes.MapHubs();
             ticker.server.start();
         });
     });
-&lt;/script&gt;</pre>
+</script>
+``` 
+
 <p>The result is that I can fire up a number of separate browser instances and they'll all get the correct values published to them from the hub over a persistent long running response. Obviously this an extremely powerful system that could be applied to Live Operations Systems where dash boards have traditionally relied on polling the server at some regular interval.</p>
 <p>[caption id="attachment_839" align="aligncenter" width="840"]<a href="http://trycatch.me/blog/wp-content/uploads/2013/05/Processor.png"><img class="size-large wp-image-839" alt="Live Processor Data to Multiple Browsers via SignalR" src="{{ site.baseurl }}/assets/Processor-1024x559.png" width="840" height="458" /></a> Live Processor Data to Multiple Browsers via SignalR[/caption]</p>
 <p><em>~Eoin C</em></p>

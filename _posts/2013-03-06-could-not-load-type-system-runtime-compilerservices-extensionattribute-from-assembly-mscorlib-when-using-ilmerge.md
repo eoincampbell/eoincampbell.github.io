@@ -46,13 +46,17 @@ author:
 <p style="text-align: justify;">and</p>
 <p style="text-align: justify;"><a href="http://www.mattwrock.com/post/2012/02/29/What-you-should-know-about-running-ILMerge-on-Net-45-Beta-assemblies-targeting-Net-40.aspx" target="_blank">http://www.mattwrock.com/post/2012/02/29/What-you-should-know-about-running-ILMerge-on-Net-45-Beta-assemblies-targeting-Net-40.aspx</a></p>
 <p style="text-align: justify;">To override this behavior you need to specify this target platform directory as part of your ILMerge command. e.g.</p>
-<pre class="brush:text;">"C:\Path\To\ILMerge.exe"
+
+```
+"C:\Path\To\ILMerge.exe"
     /out:"$(TargetDir)OutputExecutable.exe"
     /target:exe
     /targetplatform:"v4,C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0"
       "$(TargetDir)InputExecutable.exe"
       "$(TargetDir)A.dll"
-      "$(TargetDir)B.dll"</pre>
+      "$(TargetDir)B.dll"
+```
+
 <div style="text-align: justify;">I had previously been using the <a title="ILMerge.MSBuild.Tasks on Nuget" href="https://nuget.org/packages/ILMerge.MSBuild.Tasks/" target="_blank">ILMerge.MSBuild.Tasks tool from nuget</a> but unfortunately, this library doesn't currently support specifying the TargetPlatform. There's an<a title="IlMerge Tasks on Google Code" href="https://code.google.com/p/ilmerge-tasks/issues/detail?id=1" target="_blank"> unactioned open item on their issue tracker in google code</a>.</div>
 <div></div>
 <div><em>~EoinC</em></div>

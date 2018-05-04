@@ -34,15 +34,15 @@ author:
   last_name: Campbell
 ---
 <p>Here's a handy little code snippet to figure out if a local windows user account is enabled or not using the <code>System.DirectoryServices</code> namespace.</p>
-<p>&nbsp;</p>
-<pre class="brush:csharp;">
+
+```csharp
 private static bool IsUserAccountEnabled(string username)
 {
     try
     {
         var result = new DirectoryEntry { Path = "WinNT://" + Environment.MachineName + ",computer" }
             .Children
-            .Cast&lt;DirectoryEntry&gt;()
+            .Cast<DirectoryEntry>()
             .Where(d => d.SchemaClassName == "User")
             .First(d => d.Properties["Name"].Value.ToString() == username);
 
@@ -53,6 +53,6 @@ private static bool IsUserAccountEnabled(string username)
         return false;
     }
 }
-</pre>
-<p>&nbsp;</p>
+```
+
 <p><em>~Eoin Campbell</em></p>

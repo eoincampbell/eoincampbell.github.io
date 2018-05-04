@@ -73,7 +73,11 @@ author:
 <p><a href="http://msdn.microsoft.com/en-us/library/system.reflection.assemblyversionattribute.aspx">http://msdn.microsoft.com/en-us/library/system.reflection.assemblyversionattribute.aspx</a></p>
 <p><strong>Creating a Strong Name Key for your Assemblies </strong></p>
 <p style="text-align: justify;">In order to place a .NET Assembly into the GAC, the assembly must be "Strongly Named". A strong name is an identifer for the assembly comprising of  simple text name, version number, and culture information (if provided) and a public key and a digital signature. In order to strongly name your assembly we need to generate a Strong-Name Key. This can be done from inside Visual Studio, but this will make the key a part of that specific project. My personal preference is to generate the key externally using the sn.exe tool. This makes it a little easier to store the key else where and share it among other projects as we'll see below.</p>
-<pre class="brush: plain; wrap-lines: false;">sn -k keyPair.snk</pre>
+
+```
+sn -k keyPair.snk
+```
+
 <h3><span style="text-decoration: underline;"><strong>Solution Organisation</strong></span></h3>
 <p style="text-align: justify;">So lets start creating the solution. The <a title="VersioningDemo Solution on GitHub" href="https://github.com/eoincampbell/versioning-demo">sample solution is available here from GitHub</a> which shows the final product. First we create 2 Class Library projects and make one a reference of the other. We also create a "Solution Items" folder for storing common items such as our Strong Name Key and common assembly info.</p>
 <p><img class=" wp-image-480 " title="Solution Organization" alt="Solution Organization" src="{{ site.baseurl }}/assets/sol1.png" width="238" height="160" /> Solution Organization</p>
@@ -81,7 +85,11 @@ author:
 <p><img class=" wp-image-490 " title="Common bin\ Output" alt="Common bin\ Output" src="{{ site.baseurl }}/assets/sol6.png" width="449" height="146" /> Common bin\ Output</p>
 <h4><strong>Common Strong Name Key File</strong></h4>
 <p style="text-align: justify;">Next we create our Strong Named Key. In order to use the same key on each of our assemblies we externally generate an snk file using the following command and place it in an windows explorer folder under the solution.</p>
-<pre class="brush: plain; wrap-lines: false;">sn -k VersioningDemo.snk</pre>
+
+```
+sn -k VersioningDemo.snk
+``` 
+
 <p style="text-align: justify;">This file is placed in the root solution folder in windows explorer and then dragged into the Solution Items Folder within the Solution. Finally, we add this snk file to each individual project as a "Linked" File.</p>
 <p><img class=" wp-image-482 " title="Adding a Strong Named Key as a Linked File" alt="Adding a Strong Named Key as a Linked File" src="{{ site.baseurl }}/assets/sol2.png" width="527" height="506" /> Adding a Strong Named Key as a Linked File</p>
 <p style="text-align: justify;">Once the strong named key is added as a linked file, we configure the assembly to be signed-on-build in the project properties screen.</p>
