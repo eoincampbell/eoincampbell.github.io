@@ -37,7 +37,7 @@ author:
   first_name: Eoin
   last_name: Campbell
 ---
-<p>[caption id="attachment_474" align="alignright" width="162"]<a href="http://trycatch.me/blog/wp-content/uploads/v1.0.jpg"><img class=" wp-image-474 " title="Automatic AssemblyFileVersion Updates" alt="Automatic AssemblyFileVersion Updates" src="{{ site.baseurl }}/assets/v1.0.jpg" width="162" height="162" /></a> Automatic AssemblyFileVersion Updates[/caption]</p>
+<p><img class=" wp-image-474 " title="Automatic AssemblyFileVersion Updates" alt="Automatic AssemblyFileVersion Updates" src="{{ site.baseurl }}/assets/v1.0.jpg" width="162" height="162" />Automatic AssemblyFileVersion Updates</p>
 <p style="text-align: justify;">There is support in .NET for automatically incrementing the AssemblyVersion of a project by using the <strong>".*" </strong>notation. e.g.<br />
 <code>[assembly: AssemblyVersion("0.1.*")]</code></p>
 <p style="text-align: justify;">Unfortunately the same functionality isn't available for the AssemblyFileVersion. Often times, I don't want to bump the AssemblyVersion of an assembly as it will effect the strong name signature of the assembly, and perhaps the changes (a bug fix) isn't significant enough to warrant it. However I do want to automatically increment the file version, so that in a deployed environment, I can right click the file and establish when the file was built &amp; released.</p>

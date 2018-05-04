@@ -40,7 +40,7 @@ excerpt: Necessity is the mother of all... reasons to learn something new. So wh
   between which properties they wanted to search by, the operators applicable to that
   properties type.
 ---
-<p>[caption id="attachment_387" align="alignright" width="300" caption="Dynamic"]<img src="{{ site.baseurl }}/assets/dynamic-quaternity-cosmic-redemption-web-300x225.jpg" alt="Dynamic" title="Dynamic" width="300" height="225" class="size-medium wp-image-387" />[/caption]
+<p><img src="{{ site.baseurl }}/assets/dynamic-quaternity-cosmic-redemption-web-300x225.jpg" alt="Dynamic" title="Dynamic" width="300" height="225" class="size-medium wp-image-387" />
 <p style="text-align: justify;">Necessity is the mother of all... reasons to learn something new. So when some project requirements came down to put together a Search UI for an object graph of ~200 different properties in one wide table, we got an opportunity to play with some dynamic LINQ. We needed to come up with a quick way to allow a user to search across all the properties without making the UI unwieldy. What we provided them with was a simple UI allowing the user to apply 0:N conjunctive search filters. For each filter they choose an object property to filter by, the filtering operator (equal, less than, etc...) and the value they were searching for.</p>
 <p style="text-align: justify;">By the way, if there's a nicer way to do this, I'd love to know about it.</p>
 <p><!--more--></p>

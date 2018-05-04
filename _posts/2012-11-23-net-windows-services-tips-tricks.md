@@ -37,7 +37,7 @@ author:
   first_name: Eoin
   last_name: Campbell
 ---
-<p>[caption id="" align="alignright" width="179"]<img class=" " title="Windows Services" src="{{ site.baseurl }}/assets/services.png" alt="Windows Services" width="179" height="179" /> Windows Services[/caption]</p>
+<p><img class=" " title="Windows Services" src="{{ site.baseurl }}/assets/services.png" alt="Windows Services" width="179" height="179" /> Windows Services</p>
 <p style="text-align: justify;">If you've ever worked with windows services, you'll know that they're a very powerful tool to have in your background processing arsenal. Unfortunately they can be also quite a pain to work with in developer land. Recently we've been spinning up a lot of new windows service projects in work as part of a Business Intelligence Data Processing Project. I thought this would be a good time to brain dump some of the tips &amp; tricks I've come across over the past few years for dealing with .Net Windows Services.</p>
 <p style="text-align: justify;">I'll look at the basics for getting a service up and going, using the built project installer &amp; Install Util. Then I'll take a look at easier ways of running the service inside the IDE, and how to run the service in user interactive mode.</p>
 <p style="text-align: justify;">Finally I'll look at ways to make the service self-installing without having to rely upon the InstallUtil.exe as well as gaining access to configuration settings during the installation process.</p>
@@ -53,7 +53,7 @@ author:
 <li>Once you've added your ProjectInstaller open that file also and ensure that the property <em>this.serviceInstaller1.ServiceName </em>also matches this naming convention</li>
 <li>We'll also  specify a Description on the serviceInstaller1 object to give our service a meaningful description when it appears in services.msc listing</li>
 </ol>
-<p>[caption id="attachment_716" align="aligncenter" width="300"]<a href="http://trycatch.me/blog/wp-content/uploads/2012/11/1.png"><img class="size-medium wp-image-716" title="Add Installer to Windows Service" src="{{ site.baseurl }}/assets/1-300x226.png" alt="Add Installer to Windows Service" width="300" height="226" /></a> Add Installer to Windows Service[/caption]</p>
+<p><img class="size-medium wp-image-716" title="Add Installer to Windows Service" src="{{ site.baseurl }}/assets/1-300x226.png" alt="Add Installer to Windows Service" width="300" height="226" /> Add Installer to Windows Service</p>
 <p style="text-align: justify;">After building your windows service application, you can then use InstallUtil.exe from the command line to install or uninstall your applicaiton.</p>
 <p>[text]InstallUtil.exe DemoWindowsService.exe<br />
 net start DemoWindowsService<br />
@@ -61,7 +61,7 @@ net stop DemoWindowsService<br />
 InstallUtil.exe /u DemoWindowsService.exe[/text]</p>
 <h1 style="text-align: justify;">Debugging Windows Services</h1>
 <p style="text-align: justify;">Relying on InstallUtil is all well and good but it doesn't lend itself to an easy developer debugging experience. If you attempt to press F5 in order to start your Windows Service from within the IDE, you'll be presented with the following rather unhelpful popup.</p>
-<p>[caption id="attachment_717" align="aligncenter" width="533"]<a href="http://trycatch.me/blog/wp-content/uploads/2012/11/2.png"><img class="size-full wp-image-717" title="Windows Service Start Failure" src="{{ site.baseurl }}/assets/2.png" alt="Windows Service Start Failure" width="533" height="237" /></a> Windows Service Start Failure[/caption]</p>
+<p><img class="size-full wp-image-717" title="Windows Service Start Failure" src="{{ site.baseurl }}/assets/2.png" alt="Windows Service Start Failure" width="533" height="237" />Windows Service Start Failure</p>
 <p style="text-align: justify;">This is because the default code which is added to program.cs relies on launching the Service using the static ServiceBase.Run() method. This is the entry point for <em><strong>"the scum"</strong></em>. (The SCM, or Service Control Manager is the external program which controls launching the services). We can still debug our Application from here but it's a little bit round about.</p>
 <ol>
 <li>Build the Service.</li>

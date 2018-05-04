@@ -24,7 +24,7 @@ author:
   first_name: Eoin
   last_name: Campbell
 ---
-<p><a href="http://trycatch.me/blog/wp-content/uploads/2012/09/combinatorics.png"><img class=" wp-image-626 " title="How many combinations?" src="{{ site.baseurl }}/assets/combinatorics.png" alt="How many combinations?" width="205" height="205" /></a> How many combinations?</p>
+<p><img class=" wp-image-626 " title="How many combinations?" src="{{ site.baseurl }}/assets/combinatorics.png" alt="How many combinations?" width="205" height="205" /> How many combinations?</p>
 <p>[important]<br />
 This is part 1 of a 2 part post on Combinatorics in .Net</p>
 <p>The solution is publicly available on github; <a title="Combinatorics Solution on GitHub" href="https://github.com/eoincampbell/combinatorics" target="_blank">https://github.com/eoincampbell/combinatorics</a></p>
@@ -35,13 +35,13 @@ This is part 1 of a 2 part post on Combinatorics in .Net</p>
 <h1 style="text-align: justify;"><!--more--></h1>
 <h1 style="text-align: justify;">Permutations</h1>
 <p>Permutations provide all possible ordering of an input set of items. For n elements, P(n) = n!</p>
-<p><a href="http://trycatch.me/blog/wp-content/uploads/2012/09/perms_without_rep.png"><img class="wp-image-628 " title="Permutations" src="{{ site.baseurl }}/assets/perms_without_rep-300x152.png" alt="Permutations" width="240" height="122" /></a> Permutations</p>
+<p><img class="wp-image-628 " title="Permutations" src="{{ site.baseurl }}/assets/perms_without_rep-300x152.png" alt="Permutations" width="240" height="122" /> Permutations</p>
 <p>&nbsp;</p>
 <p>e.g. How many ways can you shuffle the cards in a deck of playing cards.</p>
 <p>&nbsp;</p>
 
 
-### 3 Digit Permutations
+## 3 Digit Permutations
 
 
 ```csharp
@@ -70,8 +70,7 @@ Outputs:
 
 <h1>Permutations with Repetition</h1>
 <p style="text-align: justify;">Permutations with repetition take into account that some elements in the input set may repeat. In a 3 element input set, the number of permutations is 3! = 6. However if some of those input elements are repeated, then repeated output permutations would exist as well. Permutations with Repetition take account of repeating elements in the input set and do not disgard the repeated output sets. e.g.</p>
-<p><a href="http://trycatch.me/blog/wp-content/uploads/2012/09/perms_with_rep.png"><img class=" wp-image-627 " title="Permutations with Repetition" src="{{ site.baseurl }}/assets/perms_with_rep-300x152.png" alt="Permutations with Repetition" width="240" height="122" /></a> Permutations with Repetition</p>
-<p>&nbsp;</p>
+<p><img class=" wp-image-627 " title="Permutations with Repetition" src="{{ site.baseurl }}/assets/perms_with_rep-300x152.png" alt="Permutations with Repetition" width="240" height="122" />Permutations with Repetition</p>
 
 ## 3 Digit Permutations without repetition
 
@@ -119,7 +118,7 @@ Outputs:
 
 <h1>Combinations</h1>
 <p>Combinations are subsets of items taken from a larger set of items. E.g. How many five card hands can be drawn from a  deck of 52 cards. In a set of <em><strong>n </strong></em>items the total number of <em><strong>k</strong></em> sub-item combinations is calculated by <strong><em>n! / ( k! * (n - k)! )</em><em>.</em> </strong>In a deck of 52 cards, there are 2598960 combinations.</p>
-<p><a href="http://trycatch.me/blog/wp-content/uploads/2012/09/cards.png"><img class="size-medium wp-image-633" title="52 Cards Choose 5" src="{{ site.baseurl }}/assets/cards-300x102.png" alt="52 Cards Choose 5" width="300" height="102" /></a> 52 Cards Choose 5</p>
+<p><img class="size-medium wp-image-633" title="52 Cards Choose 5" src="{{ site.baseurl }}/assets/cards-300x102.png" alt="52 Cards Choose 5" width="300" height="102" />52 Cards Choose 5</p>
 <p>&nbsp;</p>
 
 ## 3 Digit Combinations from a 5 digit input set.

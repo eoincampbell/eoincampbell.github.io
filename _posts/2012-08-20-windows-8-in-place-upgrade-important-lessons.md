@@ -24,7 +24,7 @@ author:
   first_name: Eoin
   last_name: Campbell
 ---
-<p>[caption id="attachment_552" align="alignright" width="165"]<img class=" wp-image-552 " title="Windows 8 &amp; TrueCrypt Security" src="{{ site.baseurl }}/assets/295909-windows-8-security.jpg" alt="Windows 8 &amp; TrueCrypt Security" width="165" height="165" /> Windows 8 &amp; TrueCrypt Security[/caption]</p>
+<p><img class=" wp-image-552 " title="Windows 8 &amp; TrueCrypt Security" src="{{ site.baseurl }}/assets/295909-windows-8-security.jpg" alt="Windows 8 &amp; TrueCrypt Security" width="165" height="165" /> Windows 8 &amp; TrueCrypt Security</p>
 <p style="text-align: justify;">Windows 8 RTM was released last week and since Rainmaker are MSDN Subscribers, I decided last Friday during a quiet few hours that I'd upgrade my work/development laptop to the new OS. It has not been going smoothly. Here are a few of the problems I've run into so far.</p>
 <ul style="text-align: justify;">
 <li>Make sure the ISO you're installing from matches the existing installation on your machine. In my case, the in-place edition (Windows 7 Enterprise) was incompatible with the ISO we'd downloaded (Windows 8 Enterprise N). That set me back several hours while pulling down a different ISO.</li>

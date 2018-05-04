@@ -28,7 +28,7 @@ author:
   first_name: Eoin
   last_name: Campbell
 ---
-<p>[caption id="attachment_441" align="alignright" width="300" caption="Parallel"]<img class="size-medium wp-image-441" title="Parallel" src="{{ site.baseurl }}/assets/multi-300x165.jpg" alt="Parallel" width="300" height="165" />[/caption]</p>
+<p><img class="size-medium wp-image-441" title="Parallel" src="{{ site.baseurl }}/assets/multi-300x165.jpg" alt="Parallel" width="300" height="165" /></p>
 <p style="text-align: justify;">Alas, all my hope &amp; dreams &amp; promises of a regular blog post, dashed... oh well, here's one now.</p>
 <p style="text-align: justify;">I've been playing with the <code><strong>System.Threading.Tasks</strong></code> namespace over the last few hours and it's quite neat.</p>
 <p style="text-align: justify;">We'll be rolling out some new software in the next few months at work which Processes SMS messages from Customers. In the past we had fudged together our own Multi-Threading/Multi-Pipeline code to try and get messages through the system as quickly as possible but it was fairly bloated to say the least. Enter the new <code><strong>Task</strong></code> and <code><strong>Parallel</strong></code> classes in .NET 4.0</p>

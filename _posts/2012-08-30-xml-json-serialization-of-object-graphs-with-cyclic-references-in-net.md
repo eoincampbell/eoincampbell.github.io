@@ -34,7 +34,7 @@ author:
   first_name: Eoin
   last_name: Campbell
 ---
-<p><a href="http://trycatch.me/blog/wp-content/uploads/cref.jpg"><img class=" wp-image-598  " title="Cyclic Reference" src="{{ site.baseurl }}/assets/cref.jpg" alt="Cyclic Reference" width="192" height="192" /></a> Cyclic Reference</p>
+<p><img class=" wp-image-598  " title="Cyclic Reference" src="{{ site.baseurl }}/assets/cref.jpg" alt="Cyclic Reference" width="192" height="192" /> Cyclic Reference</p>
 <p style="text-align: justify;">As a WCF Developer you've no doubt run into some issues with object serialization at some point or another during the course of developing your applications. Either during the course of pushing your entities through a WCF Service or by attempting to serialize those object for transit through other media. Recently I ran into some issues around serializing WCF Entities with Circular References (or cyclic relationships) between parent &amp; child Objects.</p>
 <h1 style="text-align: justify;">Background</h1>
 <p style="text-align: justify;">A large percentage of our company's software work relies on moving a variety of object graphs around through WCF. These object graphs, often times contain self-references or circular references. The data we deal with is primarily related to the airline industry; specifically crew &amp; flight schedules. It contains complicated tree structures of data with information on the flights crew-member's fly, the duties (work-shifts) those flights belong to &amp; the pairings, those duties are contained within. (A pairing is airline industry parlance for a collection of Duties organised into a longer 4 or 5 scheduled body of work for a crew member. Confusingly, it is not necessarily a <em>Pair</em> of anything).</p>

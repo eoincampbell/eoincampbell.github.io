@@ -37,7 +37,7 @@ author:
   first_name: Eoin
   last_name: Campbell
 ---
-<p>[caption id="attachment_836" align="alignright" width="151"]<img class=" wp-image-836  " title="SignalR" alt="SignalR" src="{{ site.baseurl }}/assets/signalr.png" width="151" height="151" /> SignalR[/caption]</p>
+<p><img class=" wp-image-836  " title="SignalR" alt="SignalR" src="{{ site.baseurl }}/assets/signalr.png" width="151" height="151" /> SignalR</p>
 <p>Recently <a title="David Fowler @ Twitter" href="https://twitter.com/davidfowl/" target="_blank">David </a><a title="David Fowler @ MSDN" href="http://weblogs.asp.net/davidfowler/" target="_blank">Fowler </a>announced the release of the Signlar 1.1.0 Beta Release. So I decided to do some dabbling to get a prototype application up and running. The solution is pretty simple. It uses a SignlaR hub to broadcast the current Processor % usage, and renders it in a nice visual graph using <a title="Highcharts interactive Javascript Charts" href="http://www.highcharts.com/" target="_blank">HighCharts</a>.</p>
 <p>&nbsp;</p>
 <div>[important]The completed solution can be found on GitHub at <a href="https://github.com/eoincampbell/signalr-processor-demo">https://github.com/eoincampbell/signalr-processor-demo</a> [/important]</div>
@@ -123,5 +123,5 @@ RouteTable.Routes.MapHubs();
 ``` 
 
 <p>The result is that I can fire up a number of separate browser instances and they'll all get the correct values published to them from the hub over a persistent long running response. Obviously this an extremely powerful system that could be applied to Live Operations Systems where dash boards have traditionally relied on polling the server at some regular interval.</p>
-<p>[caption id="attachment_839" align="aligncenter" width="840"]<a href="http://trycatch.me/blog/wp-content/uploads/2013/05/Processor.png"><img class="size-large wp-image-839" alt="Live Processor Data to Multiple Browsers via SignalR" src="{{ site.baseurl }}/assets/Processor-1024x559.png" width="840" height="458" /></a> Live Processor Data to Multiple Browsers via SignalR[/caption]</p>
+<p><img class="size-large wp-image-839" alt="Live Processor Data to Multiple Browsers via SignalR" src="{{ site.baseurl }}/assets/Processor-1024x559.png" width="840" height="458" />Live Processor Data to Multiple Browsers via SignalR</p>
 <p><em>~Eoin C</em></p>

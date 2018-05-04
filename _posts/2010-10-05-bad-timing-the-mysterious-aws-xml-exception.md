@@ -30,7 +30,7 @@ author:
   first_name: Eoin
   last_name: Campbell
 ---
-<p>[caption id="attachment_210" align="alignright" width="150" caption="Bad Luck"]<a href="http://trycatch.me/bad-timing-the-mysterious-aws-xml-exception/number_13/" rel="attachment wp-att-210"><img src="{{ site.baseurl }}/assets/number_13-150x150.jpg" alt="Bad Luck" title="Bad Luck" width="150" height="150" class="size-thumbnail wp-image-210" /></a>[/caption]<br />
+<p><a href="http://trycatch.me/bad-timing-the-mysterious-aws-xml-exception/number_13/" rel="attachment wp-att-210"><img src="{{ site.baseurl }}/assets/number_13-150x150.jpg" alt="Bad Luck" title="Bad Luck" width="150" height="150" class="size-thumbnail wp-image-210" /></a><br />
 Server Time Mis-configured, Amazon Web Services S3 .NET SDK has a bug in it, Vague XMLExceptions that don't make sense.</p>
 <p>Sometimes karma is just going to get you. There's no point fighting it. A series of events &amp; issues just come together in cosmic bliss guaranteed to completely wreck your weekend.</p>
 <p>We rolled out some new code for a new client last week. One of the "big stories" for both us and the client was a migration away from in-house content storage to a cloud based solution. We had opted to use Amazon S3 for the file storage part and after ~6 weeks of project development, rigourous QA &amp; Regression testing, and a bit of a stressful production release we were good to go. Our Biz/Mkt team had seen it and they were happy. Last minute checks of the production service were done, all looked good, and home we went.</p>

@@ -29,7 +29,7 @@ author:
   first_name: Eoin
   last_name: Campbell
 ---
-<p>[caption id="attachment_455" align="alignright" width="150" caption="The Joel Test"]<img src="{{ site.baseurl }}/assets/quality-150x150.gif" alt="The Joel Test" title="The Joel Test" width="150" height="150" class="size-thumbnail wp-image-455" />[/caption]
+<p><img src="{{ site.baseurl }}/assets/quality-150x150.gif" alt="The Joel Test" title="The Joel Test" width="150" height="150" class="size-thumbnail wp-image-455" />
 <p style="text-align: justify;">I ended up having an extremely brief chat with Joel Spolsky recently in one of the <a href="http://chat.stackexchange.com/">Stack Exchange chat rooms</a>. We learned, among other things that he'll only return to Dublin when "<em>the heroin addicts promise not to yell at him for eating fish and chips in a park near Christchurch</em>" and that he'd like to "<em>sing a duet of 'Anything You Can Do, I Can Do Better' from 'Annie get your gun' with Jeff Atwood</em>". But probably of more relevance to technology &amp; programming, I was asking him did he still consider <a title="The Joel Test: 12 Steps to Better Code - Joel on Software" href="http://www.joelonsoftware.com/articles/fog0000000043.html" target="_blank">The Joel Test</a> an accurate barometer for grading a software development team.</p>
 <blockquote><p><strong>The joel test is still a pretty good test; there's not much in there I would change.</strong></p>
 <p style="text-align: right;"><strong>--Joel Spolsky, March 2011</strong></p>

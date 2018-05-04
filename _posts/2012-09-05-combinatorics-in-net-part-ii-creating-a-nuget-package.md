@@ -37,7 +37,7 @@ author:
   first_name: Eoin
   last_name: Campbell
 ---
-<p><a href="http://trycatch.me/blog/wp-content/uploads/2012/09/nuget1.png"><img class=" wp-image-643  " title="nuget.org" src="{{ site.baseurl }}/assets/nuget1.png" alt="nuget.org" width="188" height="60" /></a> nuget.org</p>
+<p><img class=" wp-image-643  " title="nuget.org" src="{{ site.baseurl }}/assets/nuget1.png" alt="nuget.org" width="188" height="60" /> nuget.org</p>
 <p>[important]<br />
 This is part 2 of a 2 part post on Combinatorics in .Net</p>
 <p>The solution is publicly available on github; <a title="Combinatorics Solution on GitHub" href="https://github.com/eoincampbell/combinatorics" target="_blank">https://github.com/eoincampbell/combinatorics</a></p>

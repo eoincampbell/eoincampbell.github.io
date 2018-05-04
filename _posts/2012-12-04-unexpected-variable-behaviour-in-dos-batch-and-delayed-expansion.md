@@ -43,7 +43,7 @@ ECHO %ERRORLEVEL%
 ```
 
 <div></div>
-<div><a href="http://trycatch.me/blog/wp-content/uploads/2012/12/cmd.jpg"><img class=" wp-image-739 aligncenter" title="cmd" src="{{ site.baseurl }}/assets/cmd.jpg" alt="" width="543" height="227" /></a></div>
+<div><img class=" wp-image-739 aligncenter" title="cmd" src="{{ site.baseurl }}/assets/cmd.jpg" alt="" width="543" height="227" /></div>
 <div></div>
 <h1 style="text-align: justify;">Not very intuitive right?</h1>
 <div style="text-align: justify;"></div>

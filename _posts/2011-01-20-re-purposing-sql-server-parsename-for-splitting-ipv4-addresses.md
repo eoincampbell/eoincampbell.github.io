@@ -30,7 +30,7 @@ author:
   first_name: Eoin
   last_name: Campbell
 ---
-<p>[caption id="attachment_403" align="alignright" width="128" caption="Geo IP"]<img class="size-full wp-image-403" title="Geo IP" src="{{ site.baseurl }}/assets/geoip.png" alt="Geo IP" width="128" height="128" />[/caption]</p>
+<p><img class="size-full wp-image-403" title="Geo IP" src="{{ site.baseurl }}/assets/geoip.png" alt="Geo IP" width="128" height="128" /></p>
 <p style="text-align: justify;">I stumbled across a very nice repurposing of the PARSENAME function in SQL Server recently while playing around with some GeoIP Data. In SQL Server, the PARSENAME function is used for working with fully qualified server objects. e.g. a table on a linked server ('LinkedServerName . Databasename . Ownername . TableName'). But PARSENAME can be used to easily split up any 4 token, dot delimited string into its constituent parts.</p>
 <p><!--more--><br /></p>
 <p style="text-align: justify;">It's intended use, is for dealing with the string representations of server objects. e.g.</p>

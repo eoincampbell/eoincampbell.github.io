@@ -35,7 +35,7 @@ author:
   first_name: Eoin
   last_name: Campbell
 ---
-<p>[caption id="attachment_251" align="alignright" width="150" caption="Silverlight"]<a href="http://trycatch.me/silverlight-4-clock/microsoft-silverlight-logo/" rel="attachment wp-att-251"><img src="{{ site.baseurl }}/assets/microsoft-silverlight-logo-150x150.png" alt="Silverlight" title="Silverlight" width="150" height="150" class="size-thumbnail wp-image-251" /></a>[/caption]<br />
+<p><a href="http://trycatch.me/silverlight-4-clock/microsoft-silverlight-logo/" rel="attachment wp-att-251"><img src="{{ site.baseurl }}/assets/microsoft-silverlight-logo-150x150.png" alt="Silverlight" title="Silverlight" width="150" height="150" class="size-thumbnail wp-image-251" /></a><br />
 I was trying to get my Development Environment up &amp; running the other day with Silverlight 4. It turns out that the Silverlight debug runtime isn't actually part of the standard client, or the Silverlight 4 Tools for Visual Studio.</p>
 <p>Thanks to this <a href="http://forums.silverlight.net/forums/p/188683/433499.aspx">thread</a> I discovered</p>
 <p>The "Silverlight managed debugging package" is part of the developer runtime, not the SDK or Tools.  Make sure you have the latest version of the developer runtime installed (available at <a href="http://go.microsoft.com/fwlink/?LinkID=188039">http://go.microsoft.com/fwlink/?LinkID=188039</a></p>
