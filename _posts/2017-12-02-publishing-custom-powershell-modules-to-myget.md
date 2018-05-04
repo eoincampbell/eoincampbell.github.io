@@ -43,8 +43,9 @@ author:
 </ul>
 <p>A PowerShell module, is a PSM1 file which contains your functions and commandlets. It's a pretty straight forward PowerShell script file with parameters, comments etc...</p>
 <p>The manifest file contains meta-data about the module to describe it during the publish process. To create a template manifest file, you can run the following command in your module directory.</p>
-<pre class="brush:powershell;">New-ModuleManifest -Path EoinCModule.psd1
-</pre>
+```powershell
+New-ModuleManifest -Path EoinCModule.psd1
+```
 <p>The manifest file contains the meta data about your module. At a minimum you'll need to update it to include</p>
 <ul>
 <li>Author</li>
@@ -60,28 +61,32 @@ author:
 <p>PowerShell 5.0 has integrated publish support to allow you to publish direct to MyGet.</p>
 <p>In MyGet, navigate to your <a href="https://www.myget.org/profile/Me#!/AccessTokens">profile page</a> and grab your Publisher API key.</p>
 <p>Once you have your API Key, run the following commands from your PowerShell prompt to publish your module. (Don't forget to replace your feed name &amp; api key)</p>
-<pre class="brush:powershell;">Import-Module PowerShellGet
+```powershell
+Import-Module PowerShellGet
 $PSGalleryPublishUri = 'https://www.myget.org/F/YOUR-FEED-NAME/api/v2/package'
 $PSGallerySourceUri = 'https://www.myget.org/F/YOUR-FEED-NAME/api/v2'
 $APIKey = 'YOUR-API-KEY'
 
 Register-PSRepository -Name MyGetFeed -SourceLocation $PSGallerySourceUri -PublishLocation $PSGalleryPublishUri
 Publish-Module -Path .\YOUR-MODULE-DIRECTORY -NuGetApiKey $APIKey -Repository MyGetFeed -Verbose
-</pre>
+```
 <p>That's it. Your package is published.</p>
 <h2>Importing your package</h2>
 <p>Once your package is published you (or anyone else) can import it using the following command.</p>
-<pre class="brush:powershell;">Install-Module -Name "MODULE-NAME" -RequiredVersion "VERSION" -Repository "REPO-NAME"
-</pre>
+```
+Install-Module -Name "MODULE-NAME" -RequiredVersion "VERSION" -Repository "REPO-NAME"
+```
 <h2>Other Bits &amp; Pieces</h2>
 <p>The process outlined above is pretty trivial, and if you have some module scripts already, getting them published shouldn't take any longer than 5-10 minutes. I did run into a couple of little issues though. When you generate your manifest, the default template will contain a version number with only a Major.Minor component. In order to publish, the version number must contain at BUILD component as well.</p>
 <p>In order to publish you'll notice a command above to register a <code>PSRepository</code>. This will persist across PowerShell sessions once created. In the above example, I named my repository "MyGetFeed".</p>
 <p>To install my module for example, you would run</p>
-<pre class="brush:powershell;">Install-Module -Name "EoinCModule" -RequiredVersion "1.0.0" -Repository "MyGetFeed"
-</pre>
+```powershell
+Install-Module -Name "EoinCModule" -RequiredVersion "1.0.0" -Repository "MyGetFeed"
+```
 <p>To install my module on a different machine, you would first need to register the repository on that machine. e.g.</p>
-<pre class="brush:powershell;">Import-Module PowerShellGet
+```
+Import-Module PowerShellGet
 Register-PSRepository -Name "eoinc" -SourceLocation "https://www.myget.org/F/eoinc/api/v2"
 Install-Module -Name "EoinCModule" -RequiredVersion "1.0.0" -Repository "eoinc"
-</pre>
+```
 <p><em>~Eoin C</em></p>

@@ -74,7 +74,8 @@ InstallUtil.exe /u DemoWindowsService.exe[/text]</p>
 </ol>
 <h1>Using Debugger.Launch &amp; Debugger.Break</h1>
 <p style="text-align: justify;">Another option available to trigger debugging is to embed calls to the Debugger directly in your code. These calls could be surrounded by <em>Conditional</em> attributes to prevent Debug Launch statements leaking into release versions of code.</p>
-<pre class="brush: csharp; highlight: [3, 9];">        protected override void OnStart(string[] args)
+```csharp
+protected override void OnStart(string[] args)
         {
             DebugLaunch();
             MainTimer.Enabled = true;
@@ -100,7 +101,9 @@ InstallUtil.exe /u DemoWindowsService.exe[/text]</p>
         public void DebugBreak()
         {
             Debugger.Break();
-        }</pre>
+        }
+```
+
 <p style="text-align: justify;">[notice]Unfortunately it would appear that this doesn't work in Windows 8. Microsoft have slowly been phasing out the ability of Windows Services to run in Interactive mode and interact with the desktop. Since the Debugger.Launch statement needs to load a GUI for the user to interact with, the Windows Service would appear to hang on this statement. [/notice]</p>
 <h1 style="text-align: justify;">Launch Windows Service with F5</h1>
 <p style="text-align: justify;">What would be very helpful is if we could just launch our application from within the Debugger as needed. Well it turns out we can by conditionally launching the service using the ServiceBase.Run() method or by just launching it as a regular instantiated class.</p>

@@ -45,23 +45,23 @@ There's probably a dozen ways to break this, but it covers the basic for autosiz
 <iframe src="/Code/1_Clock/SlvrClock.LibTestPage.html" style="width:300px; height:233px;"></iframe><br />
 </center></p>
 <p><strong>XAML</strong></p>
-<pre class="brush: xml; wrap-lines: false;">
-&lt;UserControl x:Class="SlvrClock.Lib.MainPage"
+```xml
+<UserControl x:Class="SlvrClock.Lib.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="400" MinHeight="100" MinWidth="100"&gt;
-    &lt;Grid x:Name="LayoutRoot" Background="Black"&gt;
-        &lt;Line x:Name="lh" Stroke="Green" StrokeThickness="15" StrokeStartLineCap="Round" StrokeEndLineCap="Triangle" /&gt;
-        &lt;Line x:Name="lm" Stroke="Blue" StrokeThickness="10" StrokeStartLineCap="Round" StrokeEndLineCap="Triangle" /&gt;
-        &lt;Line x:Name="ls" Stroke="Red" StrokeThickness="5" StrokeStartLineCap="Round" StrokeEndLineCap="Triangle" /&gt;
-        &lt;Ellipse x:Name="el" Stroke="Yellow" StrokeThickness="5" /&gt;
-    &lt;/Grid&gt;
-&lt;/UserControl&gt;
-</pre>
+    mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="400" MinHeight="100" MinWidth="100">
+    <Grid x:Name="LayoutRoot" Background="Black">
+        <Line x:Name="lh" Stroke="Green" StrokeThickness="15" StrokeStartLineCap="Round" StrokeEndLineCap="Triangle" />
+        <Line x:Name="lm" Stroke="Blue" StrokeThickness="10" StrokeStartLineCap="Round" StrokeEndLineCap="Triangle" />
+        <Line x:Name="ls" Stroke="Red" StrokeThickness="5" StrokeStartLineCap="Round" StrokeEndLineCap="Triangle" />
+        <Ellipse x:Name="el" Stroke="Yellow" StrokeThickness="5" />
+    </Grid>
+</UserControl>
+```
 <p><strong>C#</strong></p>
-<pre class="brush: csharp; wrap-lines: false;">
+```csharp
 public partial class MainPage : UserControl
 {
     private Storyboard timer = new Storyboard(); //timer
@@ -108,4 +108,4 @@ public partial class MainPage : UserControl
         l.Y2 = CenterPoint.Y + r * -Math.Cos(i);
     }
 }
-</pre>
+```

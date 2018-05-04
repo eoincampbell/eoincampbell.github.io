@@ -37,7 +37,7 @@ author:
   first_name: Eoin
   last_name: Campbell
 ---
-<p>[caption id="attachment_643" align="alignright" width="188"]<a href="http://trycatch.me/blog/wp-content/uploads/2012/09/nuget1.png"><img class=" wp-image-643  " title="nuget.org" src="{{ site.baseurl }}/assets/nuget1.png" alt="nuget.org" width="188" height="60" /></a> nuget.org[/caption]</p>
+<p><a href="http://trycatch.me/blog/wp-content/uploads/2012/09/nuget1.png"><img class=" wp-image-643  " title="nuget.org" src="{{ site.baseurl }}/assets/nuget1.png" alt="nuget.org" width="188" height="60" /></a> nuget.org</p>
 <p>[important]<br />
 This is part 2 of a 2 part post on Combinatorics in .Net</p>
 <p>The solution is publicly available on github; <a title="Combinatorics Solution on GitHub" href="https://github.com/eoincampbell/combinatorics" target="_blank">https://github.com/eoincampbell/combinatorics</a></p>
@@ -52,31 +52,37 @@ This is part 2 of a 2 part post on Combinatorics in .Net</p>
 <p style="text-align: justify;">In order to deploy an assembly (or set of assemblies) as a NugetPackage, you need to first fill out a Nuspec file for that deployment. Think of a Nuspec as a sort of manifest or metadata file that contains information about the package. First of all we generated a template specification file using the following command</p>
 <blockquote><p><code>nuget spec Combinatorics.dll</code></p></blockquote>
 <p>&nbsp;</p>
-<pre class="brush:csharp;">&lt;?xml version="1.0"?&gt;
-&lt;package &gt;
-    &lt;metadata&gt;
-        &lt;id&gt;Combinatorics&lt;/id&gt;
-        &lt;version&gt;1.0.3.2&lt;/version&gt;
-        &lt;title&gt;Combinatorics Library for .NET&lt;/title&gt;
-        &lt;authors&gt;Adrian Akison, Eoin Campbell&lt;/authors&gt;
-        &lt;owners&gt;Eoin Campbell&lt;/owners&gt;
-        &lt;licenseUrl&gt;https://github.com/eoincampbell/combinatorics/blob/master/LICENCE&lt;/licenseUrl&gt;
-        &lt;projectUrl&gt;https://github.com/eoincampbell/combinatorics&lt;/projectUrl&gt;
-        &lt;iconUrl&gt;https://raw.github.com/eoincampbell/combinatorics/master/combinatorics.png&lt;/iconUrl&gt;
-        &lt;requireLicenseAcceptance&gt;false&lt;/requireLicenseAcceptance&gt;
-        &lt;summary&gt;A Combinatorics Library for Combinations, Permutations &amp;amp; Variations in .NET&lt;/summary&gt;
-        &lt;description&gt;A Combinatorics Library providing Generic IEnumerable classes ...&lt;/description&gt;
-        &lt;releaseNotes&gt;Notes&lt;/releaseNotes&gt;
-        &lt;copyright&gt;Copyright © 2012&lt;/copyright&gt;
-        &lt;tags&gt;Combinatorics Combination Permutation Variation .NET Library&lt;/tags&gt;
-    &lt;/metadata&gt;
-&lt;/package&gt;</pre>
+
+```xml
+<?xml version="1.0"?>
+<package >
+    <metadata>
+        <id>Combinatorics</id>
+        <version>1.0.3.2</version>
+        <title>Combinatorics Library for .NET</title>
+        <authors>Adrian Akison, Eoin Campbell</authors>
+        <owners>Eoin Campbell</owners>
+        <licenseUrl>https://github.com/eoincampbell/combinatorics/blob/master/LICENCE</licenseUrl>
+        <projectUrl>https://github.com/eoincampbell/combinatorics</projectUrl>
+        <iconUrl>https://raw.github.com/eoincampbell/combinatorics/master/combinatorics.png</iconUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <summary>A Combinatorics Library for Combinations, Permutations &amp;amp; Variations in .NET</summary>
+        <description>A Combinatorics Library providing Generic IEnumerable classes ...</description>
+        <releaseNotes>Notes</releaseNotes>
+        <copyright>Copyright © 2012</copyright>
+        <tags>Combinatorics Combination Permutation Variation .NET Library</tags>
+    </metadata>
+</package>
+```
+
 <p style="text-align: justify;">Once the specification file was created, it was moved to a "preparation folder". Nuget supports spec'ing and packaging an assembly direcltly from the Project directory &amp; csproj files, but if you want to do your own multi-framework targetting you need to manage things a little differently. The "Nuget" folder under the solution root contains the Spec &amp; also contains the required <em><strong>Lib</strong></em> folder structure for the different versions of the assemblies.</p>
 <p style="text-align: justify;">You can read more about the internal organipackage</p>
 <h1 style="text-align: justify;">Building &amp; Deploying the Package</h1>
 <p style="text-align: justify;">Building the Solutions &amp; Deploying the package to nuget is handled by 2 batch files in the solution root.</p>
 <p style="text-align: justify;">First <strong>Build.bat </strong>runs, builds both solutions, cleans out the old Nuget Package Lib structure &amp; copies the new assemblies to the newly created directory structure.</p>
-<pre class="brush:text;">@echo off
+
+```
+@echo off
 devenv Combinatorics.sln /Clean
 devenv Combinatorics.sln /Build Debug
 
@@ -97,10 +103,16 @@ copy "Combinatorics.Net40\bin\*.xml" "Nuget\lib\net40\"
 
 copy "Combinatorics.Net40\bin\*.dll" "Nuget\lib\sl40\"
 copy "Combinatorics.Net40\bin\*.pdb" "Nuget\lib\sl40\"
-copy "Combinatorics.Net40\bin\*.xml" "Nuget\lib\sl40\"</pre>
+copy "Combinatorics.Net40\bin\*.xml" "Nuget\lib\sl40\"
+```
+
 <p style="text-align: justify;">Next the nupkg package is created &amp; deployed to Nuget using the PushToNuget.bat BatchFile.</p>
-<pre class="brush:text;">@echo off
+
+```
+@echo off
 nuget pack Nuget\Combinatorics.nuspec
-nuget push %1</pre>
+nuget push %1
+```
+
 <p style="text-align: justify;">Magic, we've just deployed our first nuget package. You can download the combinatorics package from Nuget <a title="Combinatorics on Nuget" href="https://nuget.org/packages/Combinatorics" target="_blank">here</a> and read more about the using the solution <a title="Combinatorics in .NET – Part I – Permutations, Combinations &amp; Variations" href="http://trycatch.me/combinatorics-in-net-part-i-permutations-combinations-variations/" target="_blank">here</a> &amp; <a title="Combinatorics on Eoin Campbell's GitHub" href="https://github.com/eoincampbell/combinatorics" target="_blank">here</a>.</p>
 <p><em>~Eoin Campbell</em></p>

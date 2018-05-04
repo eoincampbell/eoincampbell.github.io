@@ -135,7 +135,7 @@ author:
 <p>When our server comes back online, we can move the remainder of the default databases.<br />
 	Running the following series of SQL Commands will update the system to expect the MDFs<br />
 	and LDFs and the new location on next start up.</p>
-<pre>
+```sql
 ALTER DATABASE [msdb] MODIFY FILE ( NAME = MSDBData , FILENAME = 'M:\DATA\MSDBData.mdf' )
 ALTER DATABASE [msdb] MODIFY FILE ( NAME = MSDBLog , FILENAME = 'L:\LOGS\MSDBLog.ldf' )
 ALTER DATABASE [model] MODIFY FILE ( NAME = modeldev , FILENAME = 'M:\DATA\model.mdf' )
@@ -145,7 +145,7 @@ ALTER DATABASE [tempdb] MODIFY FILE (NAME = templog, FILENAME = 'D:\SQLTEMP\temp
 
 --You can verify them with this command
 SELECT name, physical_name AS CurrentLocation, state_desc FROM sys.master_files 
-	</pre>
+```
 <p>Shut down the SQL Instance one more time. Phyiscally move your MDF and LDF files to<br />
 	their new locations in Explorer, and finally restart the instance. If there are any<br />
 	problems with the setup or the server fails to start, you can review the ERROR LOG in<br />

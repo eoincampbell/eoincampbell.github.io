@@ -30,11 +30,11 @@ author:
   first_name: Eoin
   last_name: Campbell
 ---
-<p>[caption id="attachment_233" align="alignright" width="150" caption="Config Fun"]<a href="http://trycatch.me/installutil-windows-services-projectinstallers-with-app-config-settings/cogs/" rel="attachment wp-att-233"><img src="{{ site.baseurl }}/assets/cogs-150x150.jpg" alt="Config Fun" title="Config Fun" width="150" height="150" class="size-thumbnail wp-image-233" /></a>[/caption]We had a situation in work where we needed to make service installation a more configurable process.</p>
+<p><a href="http://trycatch.me/installutil-windows-services-projectinstallers-with-app-config-settings/cogs/" rel="attachment wp-att-233"><img src="{{ site.baseurl }}/assets/cogs-150x150.jpg" alt="Config Fun" title="Config Fun" width="150" height="150" class="size-thumbnail wp-image-233" /></a>We had a situation in work where we needed to make service installation a more configurable process.</p>
 <p>So a very simple example, In order to install a .NET Windows Service we need to provide it with a username & password that the services will run as. We can either provide that information at installation time, or through the following properties in the ProjectInstaller.cs file for your service.</p>
 <p>However in an environment where multiple developers are working on a service, particularly a service that requires elevated privileges and needs to run as a specific account, this can be a royal pain. </p>
 <p><!--more--></p>
-<pre class="brush:csharp; highlight: [6,7]; wrap-lines: false">
+```csharp
 private void InitializeComponent()
 {
     this.serviceProcessInstaller1 = new System.ServiceProcess.ServiceProcessInstaller();
@@ -49,12 +49,12 @@ private void InitializeComponent()
     this.Installers.AddRange(new System.Configuration.Install.Installer[] {
 	this.serviceProcessInstaller1,	this.serviceInstaller1});
 }
-</pre>
+```
 <p><strong>Option 1.</strong> Type in the credentials every time the service is Installed/Started... a not-so-ideal manual process when constantly re-starting a service to debug. It's also a pain for an automated xcopy releases where there is one big batch job which will stop, uninstall, reinstall & re-start every service in the deployment.</p>
 <p><strong>Option 2.</strong> Leave the account credentials hard-coded in. This isn't ideal either. With Local Dev Environments, Shared Development Environments and Staging & Production platforms, it's too easy to leave the wrong credentials hardcoded into the ProjectInstaller, or worse, introduce a small typo/bug when the values are changed/recompiled between environment releases.</p>
 <blockquote><p>Wouldn't it be better if this could be configurable ?</p></blockquote>
 <p>Unfortunately, we need to do a little gymnastics in order to gain access to the .config file of the service at installation time when using InstallUtil.exe. The <em>App.config</em> Configuration File which the ConfigurationManager is using during the installation process is actually <em>InstallUtil.exe.config</em>... not what we want. Instead, we can manually load the associated configuration file for the assembly which contains the Project Installer, and retrieve our settings from that.</p>
-<pre class="brush:csharp; wrap-lines: false">
+```csharp
 private static string GetConfigurationValue(string key)
 {
     var service = Assembly.GetAssembly(typeof(ProjectInstaller));
@@ -66,9 +66,9 @@ private static string GetConfigurationValue(string key)
 
     return config.AppSettings.Settings[key].Value;
 }
-</pre>
+```
 <p>We can now add our installation information to the configuration file which is template controlled under our release process. </p>
-<pre class="brush:csharp; highlight: [6,7]; wrap-lines: false">
+```csharp
 private void InitializeComponent()
 {
     this.serviceProcessInstaller1 = new System.ServiceProcess.ServiceProcessInstaller();
@@ -85,5 +85,5 @@ private void InitializeComponent()
 	this.serviceProcessInstaller1,
 	this.serviceInstaller1});
 }
-</pre>
+```` 
 <p>The usual caveats about config file encryptions and protecting your passwords apply.</p>

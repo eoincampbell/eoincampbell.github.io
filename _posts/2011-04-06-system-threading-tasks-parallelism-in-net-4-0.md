@@ -36,7 +36,9 @@ author:
 <p style="text-align: justify;">In our system, we take a collection of <code>MyObject</code>s from a DataSource. (usually DB or MSMQ). Each MyObject represents an instruction sent in by a customer so the time it takes to process a single MyObject can vary greatly depending on what part of the system the instruction needs to interact with.</p>
 <p style="text-align: justify;">It doesn't make much sense from a UX point-of-view to process these in a linear sequential order waiting for one to complete before the next starts... e.g. if message A took 9 seconds to process &amp; messages B-J took one second each, you would ideally want to process B-J on a seperate thread and get them out in Paralell. Enter the <code><strong>Parallel.ForEach&lt;T&gt;</strong></code> &amp; <code><strong> Parallel.Invoke</strong></code> methods. These allow you to pass in a collection of Input Objects &amp; a delegate to process them, and the CLR will handle all the multi thread/multi core messiness for you under the hood.</p>
 <p style="text-align: justify;">It comes with the usual abort handling code so that if you need to break out of the parallelism at some point (maybe due to some critical exception), you can. In our case this is necessary so we can requeue any messages that haven't yet been processed, if the Windows Service OnStop function is called.</p>
-<pre class="brush: csharp; wrap-lines: false;">public class MyObject
+
+```csharp
+public class MyObject
 {
     public int MoID {get;set;}
     public bool ProcessedSuccessfully { get; set; }
@@ -98,4 +100,4 @@ class Program
     {
         Console.WriteLine("Queueing ID: {0:0000}", message.MoID);
     }
-}</pre>
+}```
