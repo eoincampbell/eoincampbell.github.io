@@ -22,13 +22,9 @@ menu:
     url: '/'
   - title: 'About'
     url: '/about/'
-  - title: 'Development'
-    url: '#'
   - title: 'Categories'
     url: '/categories/'
     type: categories
-  - title: 'Tags'
-    url: '/tags/'
   - title: 'Development'
     url: '#'
   - title: 'Links'
