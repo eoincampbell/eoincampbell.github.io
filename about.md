@@ -3,6 +3,7 @@ layout: page
 title: About
 share: false
 comments: false
+float_share: false
 ---
 
 
