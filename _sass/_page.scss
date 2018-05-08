@@ -610,6 +610,9 @@ ul.social-buttons li a:active {
 		@media #{$medium}{
 			display: table-cell;
 		}
+		@media #{$small}{
+			display: table-cell;
+		}
 	}
 }
 
