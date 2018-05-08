@@ -2,8 +2,19 @@
 layout: post
 title: Migrating from Wordpress to Jekyll
 description: A simple approach to migrating a wordpress blog to Jekyll and Github Pages.
-tags: [jekyll wordpress blog linux wsl github]
-categories: [coding random]
+tags: 
+- jekyll 
+- wordpress 
+- blog 
+- linux 
+- wsl 
+- github
+- ubuntu
+- ruby
+categories: 
+- coding
+- random
+published: true
 ---
 
 Recently I had the displeasure of Wordpress screwing up on me yet again. I've been paying a small but measurable amount to a colo based in Ireland for about the past 8 years to provide a small VPS running wordpress. At the time I set it up it was great. But times have changes. The VPS is underpowered. I don't have the need for a remote windows box anymore with Azure MPN/Dev subscriptions giving me all the free .NET hosting I need. And, Wordpress is a slow hunking mess. I really don't need a big kludge of a CMS running on MySQL for a personal blog with minimal traffic.
