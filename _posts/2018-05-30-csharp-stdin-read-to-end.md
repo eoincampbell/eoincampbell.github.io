@@ -1,10 +1,13 @@
 ---
 layout: post
-title: ReadToEnd using STDIN from a C# Console App
+title: Read to end using stdin from the console
 description: 
 tags: 
 - console
 - stdin
+- standard input
+- redirect
+- read to end
 categories: 
 - c#
 - .net
