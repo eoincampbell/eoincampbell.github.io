@@ -87,7 +87,7 @@ Finally, although the jekyll markdown format supports html, you'll probably find
 
 Have fun
 
-***Eoin C***
+***~Eoin Campbell***
 
 [jekyll]: https://jekyllrb.com/docs/home
 [github-pages]: https://pages.github.com/

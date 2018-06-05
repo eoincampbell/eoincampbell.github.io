@@ -67,4 +67,4 @@ author:
     -assemblyInfoFilePath "$(SolutionDir)\Project\Properties\AssemblyInfo.cs"
 ```
 
-<p><em>~Eoin C</em></p>
+<p><em>~Eoin Campbell</em></p>

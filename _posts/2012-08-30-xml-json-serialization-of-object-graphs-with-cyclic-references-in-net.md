@@ -218,4 +218,4 @@ Console.WriteLine(result);
 
 <p>&nbsp;</p>
 <p style="text-align: justify;">Works just great.<br />
-<em>~Eoin C</em></p>
+<em>~Eoin Campbell</em></p>

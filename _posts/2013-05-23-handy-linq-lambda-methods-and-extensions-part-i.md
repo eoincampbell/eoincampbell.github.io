@@ -110,4 +110,4 @@ SuperConsole.WriteLine(results, true);
 ```
 
 <p>In the next post, we'll look at some the lazy &amp; deferred execution capabilities of LINQ and some useful methods for performing quick calculations and manipulations on our collections.</p>
-<p><em>~Eoin C</em></p>
+<p><em>~Eoin Campbell</em></p>

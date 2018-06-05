@@ -215,4 +215,4 @@ this.serviceInstaller1.StartType = ServiceStartMode.Automatic;
 <li>A public Stop or End method, called from OnStop()</li>
 </ul>
 <p style="text-align: justify;">The reason for this is simply to prevent lock-in &amp; tight coupling to the windows service treating it only as a helpful host. This allows me to easily spin up my Engine class in a standalone Console Application, inside a web apps Global.asax or in an Azure Worker role with a minimum of refactoring in order to extract the functionality.</p>
-<p><em>~Eoin C</em></p>
+<p><em>~Eoin Campbell</em></p>

@@ -134,3 +134,6 @@ private static bool ProcessRequestError( ... )
 {% endhighlight %}
 <p>This is where it all goes pear shaped. The <code>WebException</code> thrown is actually a 403 Access Forbidden. But the <code>ProcessRequestError</code> method doesn't account for this. It'll trigger the retry flag on an InternalServerError or ServiceUnavailable status code but otherwise it will continue on, and attempt to parse the response body into an S3Error. In our case the response body is <code>string.Empty</code>, an <code>XmlException</code> gets thrown and the original <code>WebException</code> gets lost in the ether</p>
 <p><strong>*Wanders off to find a way to log bugs with the AWS for .NET Dev team*</strong></p>
+
+
+***Eoin Campbell***

@@ -116,4 +116,4 @@ protected MailMessage CreateMailMessage()
 ```
 
 <p>All done. Now you can happily send email log messages in HTML format via your Application Logging calls.</p>
-<p><em>~EoinC</em></p>
+<p><em>~Eoin Campbell</em></p>

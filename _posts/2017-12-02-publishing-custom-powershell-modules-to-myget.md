@@ -89,4 +89,4 @@ Import-Module PowerShellGet
 Register-PSRepository -Name "eoinc" -SourceLocation "https://www.myget.org/F/eoinc/api/v2"
 Install-Module -Name "EoinCModule" -RequiredVersion "1.0.0" -Repository "eoinc"
 ```
-<p><em>~Eoin C</em></p>
+<p><em>~Eoin Campbell</em></p>

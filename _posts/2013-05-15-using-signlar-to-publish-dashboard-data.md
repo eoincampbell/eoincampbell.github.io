@@ -124,4 +124,4 @@ RouteTable.Routes.MapHubs();
 
 <p>The result is that I can fire up a number of separate browser instances and they'll all get the correct values published to them from the hub over a persistent long running response. Obviously this an extremely powerful system that could be applied to Live Operations Systems where dash boards have traditionally relied on polling the server at some regular interval.</p>
 <p><img class="size-large wp-image-839" alt="Live Processor Data to Multiple Browsers via SignalR" src="{{ site.baseurl }}/assets/Processor-1024x559.png" width="840" height="458" />Live Processor Data to Multiple Browsers via SignalR</p>
-<p><em>~Eoin C</em></p>
+<p><em>~Eoin Campbell</em></p>

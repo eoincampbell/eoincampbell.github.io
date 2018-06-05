@@ -318,4 +318,4 @@ using(var client = new ComplexCustomHeaderServiceClient())
 
 <p><img class=" wp-image-774 " alt="Wcf Header Demo Result" src="{{ site.baseurl }}/assets/result.png" width="510" height="147" />WCF Header Demo Result</p>
 <p>Excellent.</p>
-<p><em>~Eoin C</em></p>
+<p><em>~Eoin Campbell</em></p>

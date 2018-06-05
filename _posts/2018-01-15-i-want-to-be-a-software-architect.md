@@ -96,5 +96,5 @@ author:
 <p>There are membership communities like the <a href="https://www.iasaglobal.org/">International Association of Software Architects</a> where you can find further material on software architecture. There are formal training and certification paths like the <a href="http://www.opengroup.org/certifications/togaf">TOGAF Certification </a>where you can get a recognized qualification as an enterprise architect. And within the Microsoft world, there are MCA (Microsoft Certified Architect) paths that you can take, and several Application/Solution level certifications like <a href="https://www.microsoft.com/en-ie/learning/exam-70-534.aspx">Architecting Microsoft Azure Solutions</a>.</p>
 <p>Good Luck</p>
 <p>&nbsp;</p>
-<p><em>~Eoin C</em></p>
+<p><em>~Eoin Campbell</em></p>
 <p>&nbsp;</p>

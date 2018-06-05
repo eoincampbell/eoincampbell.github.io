@@ -59,4 +59,4 @@ author:
 
 <div style="text-align: justify;">I had previously been using the <a title="ILMerge.MSBuild.Tasks on Nuget" href="https://nuget.org/packages/ILMerge.MSBuild.Tasks/" target="_blank">ILMerge.MSBuild.Tasks tool from nuget</a> but unfortunately, this library doesn't currently support specifying the TargetPlatform. There's an<a title="IlMerge Tasks on Google Code" href="https://code.google.com/p/ilmerge-tasks/issues/detail?id=1" target="_blank"> unactioned open item on their issue tracker in google code</a>.</div>
 <div></div>
-<div><em>~EoinC</em></div>
+<div><em>~Eoin Campbell</em></div>

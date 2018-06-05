@@ -179,7 +179,7 @@ Next, we take the ID of that `Product` document and do a subsequent query for al
 
 Hopefully that was a useful insight into partitioning data in Cosmos DB. Would love to hear other peoples experiences with it. And also, if there's anything I've misinterpretted,  drop me a note in the comments so I can correct it. Like I said, this has been a big learning experience for us here.
 
-***Eoin C***
+***Eoin Campbell***
 
 
 

@@ -118,4 +118,4 @@ author:
 </ul>
 <p style="text-align: justify;">At 15:30 we left... I didn't have another lecture in me, although at least we'd had the common courtesy to stay that long. Half the room didn't come back after lunch.</p>
 <p style="text-align: justify;">The takeaways; I know that alot of time and effort goes into these events, and particularly when they are free, that time and effort is greatly appreciated. But you need to make sure you get your audience right. If you advertise Advanced and deliver basic, people will be disappointed. That was clear from the mass exodus that occured during the day... I'm kinda curious to know if there was anyone around for the Q&amp;A at all. I'll be sure as heck checking the agenda on these type of events before committing my time to them in future. We aren't currently using Windows Azure in our company yet, and embarrassingly I had been promoting it internally and had convinced several of my colleagues to give up their Saturday for it.</p>
-<p style="text-align: justify;"><em>~Eoin C</em></p>
+<p style="text-align: justify;"><em>~Eoin Campbell</em></p>

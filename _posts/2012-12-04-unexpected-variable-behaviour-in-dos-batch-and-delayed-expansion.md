@@ -74,4 +74,4 @@ ECHO %ERRORLEVEL%
 ```
 
 <div>For when powershell just isn't retro enough ;-)<br />
-<em>~Eoin C</em></div>
+<em>~Eoin Campbell</em></div>

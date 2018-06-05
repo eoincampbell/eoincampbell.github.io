@@ -42,4 +42,4 @@ In the first version, there's a single method definition that allows the consume
 <p>Hence why the .NET Frameworks BCL libs all favour Method Overloading over Optional Parameters. But in my case this is internal project code, part of an application stack that gets deployed as a whole.</p>
 <p>There's a benefit to brevity in my code and I'd prefer the implementation to be more concise since I having full control of both the API and Caller as well as the deployment process. So Optional Parameters it is.</p>
 <p>If on the other hand you're writing public API libs for publishing to nuget or you operate in an environment where partial deployments of libraries and components occur, go with Method Overloading.</p>
-<p><em>~Eoin</em></p>
+<p><em>~Eoin Campbell</em></p>

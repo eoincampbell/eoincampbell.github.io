@@ -60,4 +60,4 @@ author:
 <p>Review the basics. Yes I know you are a 10-year senior developer and you can write code day-in-day-out. But I still expect you to be able to talk to me about the basics. What are Solid Principles? What is encapsulation? What is polymorphism? Can you name some software design patterns that aren't the Factory or Singleton patterns? Have you reviewed any architectural patterns? etc.</p>
 <h3>Thoughts</h3>
 <p>Don't be complacent about getting a new job. Yes, the supply and demand nature of our industry may have tilted things in favour of the candidate of late, but that doesn't mean that good companies will lower the quality bar when they're under pressure. If you want a good job in a good company, then you have to assume that they will have good standards which requires an effort from you, the candidate, to land the role you want.</p>
-<p><em>~Eoin C</em></p>
+<p><em>~Eoin Campbell</em></p>

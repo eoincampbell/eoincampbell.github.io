@@ -87,3 +87,5 @@ private void InitializeComponent()
 }
 ```` 
 <p>The usual caveats about config file encryptions and protecting your passwords apply.</p>
+
+***Eoin Campbell***

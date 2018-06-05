@@ -54,4 +54,4 @@ author:
 <h2>The bottom line...</h2>
 <p>...is that the IT hiring market is particularly challenging for SMEs. Finding talented developers, bringing them through the interview process and getting them in situ, is a significant undertaking. And when you get them, you better do everything you bloody well can to keep them.</p>
 <p>After following this path for the past 3 years, we've now hit an impasse. The time and resource cost, lead time for starting and general difficulties with the hiring process for quality full time developers, is now a quantifiable impediment to our business. Without the ability to ramp up on demand, we're faced with either turning down growth-business, or increasing the workload on our existing team. Neither option is particularly palatable. We need to pivot our . Contractor rotation? Near-shoring/Out-sourcing? A change in tack is definitely required.</p>
-<p><em>~Eoin C</em></p>
+<p><em>~Eoin Campbell</em></p>

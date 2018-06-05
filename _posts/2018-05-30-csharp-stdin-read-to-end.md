@@ -44,4 +44,4 @@ And you can now redirect/pipe to STDIN from other files.
 Get-Content .\input.txt | .\stdin-test.exe
 ``` 
 
-***Eoin C***
+***Eoin Campbell***

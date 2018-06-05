@@ -85,3 +85,5 @@ private static string ALPHANUMERIC_ALT =
 ```
 
 Now all I have to do is go write a Math Engine for it ;-)
+
+***Eoin Campbell***

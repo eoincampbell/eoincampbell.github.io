@@ -48,4 +48,4 @@ author:
 <li>It supports a whole variety of target deployments for your project artifacts including Azure, FTP, Nuget and more</li>
 </ul>
 <p>There's probably more I haven't discovered yet. Next job will be to automate the push to Nuget based on commits back to master after Pull Requests are confirmed.</p>
-<p><em>~Eoin C</em></p>
+<p><em>~Eoin Campbell</em></p>

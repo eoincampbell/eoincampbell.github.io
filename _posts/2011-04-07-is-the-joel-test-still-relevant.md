@@ -57,4 +57,4 @@ author:
 <blockquote><p><strong>2. Can you do a deployment in one step?<br />
 3. Do you use a continuous integration &amp; automated testing platform?</strong></p></blockquote>
 <p style="text-align: justify;">Outside of that I think he's right. Perhaps a question asking do they have multiple environments for Dev, QA, Staging, Production. (Nothing as <em><strong>exciting</strong></em> as releasing production code directly from your local PC). You can take your pick of Development Methodologies these days as well, be it SCRUM, Agile, XP, etc... but as long as development cycles are conducted in a sensible/structured manner. That being said, I think it's stood the test of time pretty well. Kudos Joel.</p>
-<p><em>~EoinC</em></p>
+<p><em>~Eoin Campbell</em></p>

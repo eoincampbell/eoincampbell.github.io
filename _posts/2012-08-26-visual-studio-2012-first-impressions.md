@@ -45,4 +45,4 @@ author:
 <p><img class="size-medium wp-image-573" title="Visual Studio 2012 - Simulator" src="{{ site.baseurl }}/assets/Screenshot4-300x183.png" alt="Visual Studio 2012 - Simulator" width="300" height="183" />Visual Studio 2012 - Simulator</p>
 <p>&nbsp;</p>
 <p>I'm sure I'll stumble across other "cool" features in the coming weeks.</p>
-<p>~Eoin C</p>
+<p>~Eoin Campbell</p>
