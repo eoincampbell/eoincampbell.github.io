@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Practical Partitioning in Cosmos DB
+title: Data Partitioning Strategy in Cosmos DB
 description: Deciding how to partition your data in Cosmos DB is one of the most challenging architecture/design decisions
 tags: 
 - cosmos db
@@ -85,7 +85,7 @@ However if a single logical attempts to grow beyond the size of a single physica
 | P2   | `/city=Dublin`   | 5GB  | 4,000 RU/s | :white_check_mark: |
 | P3   | `/city=London`   | 10GB  | 10,000 RU/s | :x: |
 
-Microsoft provides some information here on [how the number of required partitions are calculated][partitioning-calculation] but since this is **Practical Partitioning** lets look at a practical example
+Microsoft provides some information here on [how the number of required partitions are calculated][partitioning-calculation] but lets look at a practical example
 
  - You configure a collection with 100,000 RU/s capacity **T**
  - The maximum throughput per physical partition is 10,000 RU/s **t**
