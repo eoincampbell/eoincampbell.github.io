@@ -5,9 +5,7 @@ comments: false
 float_share: true
 share: true
 ---
-
-
-### About Me
+# About Me
 
 By day, I’m Senior Technical Architect for [ChannelSight][channelsight], a advertising technology company based in Dublin, Ireland.
 
@@ -17,7 +15,9 @@ I live in Dublin, Ireland with my Wife and 2 kids. I try to write code at some-w
 
 I enjoy [photography][flickr] & try and get out with my camera as much as possible.
 
-if you'd like to contact me you can send me an email to my personal email address: <a href="#">myfirstname.mysurname@gmail.com</a>
+if you'd like to contact me you can send me an email to my personal email address: myfirstname.mysurname@gmail.com
+
+***Eoin Campbell***
 
 [github]: https://github.com/eoincampbell
 [stackoverflow]: http://stackoverflow.com/users/30155/eoin-campbell
