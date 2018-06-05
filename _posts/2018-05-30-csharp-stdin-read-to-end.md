@@ -43,3 +43,5 @@ And you can now redirect/pipe to STDIN from other files.
 ```powershell
 Get-Content .\input.txt | .\stdin-test.exe
 ``` 
+
+***Eoin C***
