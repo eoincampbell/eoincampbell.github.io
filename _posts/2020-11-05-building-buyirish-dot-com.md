@@ -20,17 +20,15 @@ image:
     feature: buyirish.png
 ---
 
-Over the past few days myself & a few colleagues have been chipping away at a little hackaton project to try and help drive consumers towards Irish retailers in the run into Xmas. The premis was simple. Could we use our existing knowledge and capabilities around product data acquistion and web crawling/scraping and create a meta-search engine to allow a consumer to search for products and gift ideas (incl. price & availability) across lots of Irish retailers and product categories?
+Over the past few days myself & a few colleagues have been chipping away at a little hackathon project to try and help drive consumers towards Irish retailers in the run into Xmas. The premis was simple. Could we use our existing knowledge and capabilities around product data acquistion and web crawling/scraping and create a search engine/aggregator site to allow a consumer to search for products and gift ideas (incl. price & availability) across lots of Irish retailers and product categories?
 
 The result... [https://buyirish.com][buyirish-url]
 
 ## Gathering the Data
 
-The first major challenge we had was acquiring the data. Typically, we'll need to tailor our crawlers on a per-site basis. Is information available in the page source, or dynamically injected by javascript? How is that data presented? Do we need to tailor the parsers to identify specific places on the page to extract content? Do we need to get around anti-bot measures or use web proxies? Thankfully our Alan & our DAX (Data Acquisition) team is really on the ball and they came up with clever solution using a combination of services to gather the data in a fairly generic manner.
+The first major challenge we had was acquiring the data. Typically, we'll need to tailor our crawlers on a per-site basis. Is information available in the page source, or dynamically injected by javascript? How is that data presented? Do we need to tailor the parsers to identify specific places on the page to extract content? Do we need to get around anti-bot measures or use web proxies? Thankfully Alan & our DAX (Data Acquisition) team are really on the ball and they came up with a clever solution using a combination of services to gather the data in a fairly generic manner.
 
-A master list of scraped datasets was maintained centrally and each time we added additional retailer, their data set was appended to this master list.
-
-This allowed us to build an extremely simple .NET Core console tool which performed the following logic
+A master list of scraped datasets was maintained centrally and each time we added additional retailer, their data set was appended to this master list.This allowed us to build an extremely simple .NET Core console tool which performed the following logic
 
 ```csharp
 using var webClient = new WebClient();
@@ -51,7 +49,7 @@ foreach (var retailer in r.Retailers)
 
 ## A Rough Design
 
-We knew that to get this up and going quickly we didn't want to start muddling around with a SQL Instance or have to start modelling and pushing migrations with something like Entity Framework. We already use CosmosDB extensively in our core platform. Our production APIs serve millions of requests daily from Cosmos so we knew it would be a good candidate for direct storage and could deal with requests at scale. BUT... we also knew  that the equivalent of the following query wasn't going to get great results from a relevancy point of view.
+We knew that to get this up and going quickly we didn't want to start muddling around with a Azure SQL instance or have to start modelling and pushing migrations with something like Entity Framework to a relational db. And we already use CosmosDB extensively in our core platform. Our production APIs serve millions of requests daily from Cosmos so we knew it would be a good candidate for direct storage and could deal with requests at scale. BUT... we also knew that the equivalent of the following query wasn't going to get great results from a relevancy point of view.
 
 ```sql
 SELECT     *
@@ -61,7 +59,7 @@ OR         data.Description LIKE '%term%'
 OR         data.Tags LIKE '%term%'
 ```
 
-A little light bedtime reading later, and we thought we had our answer. We could bulk load the data directly into Cosmos and then point an Azure Cognitive Search instance at the collection. ACS would keep it's own index up to date based on a high-watermark timestamp check every 60 minutes. It would also give us the benefit of result relevancy scoring, and the ability to tweak the scoring profiles if needed.
+A little light bedtime reading later, and we thought we had our answer. We could bulk load the data directly into Cosmos and then point an Azure Cognitive Search instance at the CosmosDB container. ACS would keep it's own index up to date based on a high-watermark timestamp check every 60 minutes. It would also give us the benefit of result relevancy scoring, and the ability to tweak the scoring profiles if needed.
 
 ## Bulkloading into CosmosDB
 
@@ -91,7 +89,7 @@ public async Task BulkTest(IEnumerable<Item> items)
 
 ## Creating an Azure Cognitive Services Index
 
-With the data safely in Cosmos, next we set about setting up the Azure Cognitive Services instance. Setting this up was a breeze. You can create a new instance directly from the Cosmos Resource, [and there's a walkthrough wizard to get the indexer setup using an hourly high-watermark check on the `_ts` timestamp][azure-cognitive-search-setup]
+With the data safely in Cosmos, next we set about setting up the Azure Cognitive Services instance. Configuring this was a breeze. You can create a new instance directly from the CosmosDB Resource, [and there's a walkthrough wizard to get the indexer setup using an hourly high-watermark check on the `_ts` timestamp][azure-cognitive-search-setup]
 
 One thing that took a little bit of trial and error was the composition of the index in terms of what should be retrievable, searchable, orderable and facetable. More than once, we had to purge/drop and recreate the index as once it's created you can't modify the configuration. This is very manageable with a small initial dataset of a few hundred thousand products but I can imagine this would be slightly more work in production where we have ~10^7 product updates happening every day.
 
@@ -107,15 +105,13 @@ The use case is pretty simple.
 
 When the consumer arrives on the site, they can search for a term and ACS will return the most relevant products in order based on it's internal scoring algorithm and a tweaked scoring profile we've provided. (_More on that below_)
 
-The search query will return 6 results at a time and an infinite scroll javascript plugin handles fetching the next paginated set of product cards for that search term. In addition to the search results, the ACS response contains a facet result list based on the retailers that carry those products. These are displayed on the left hand side (including a result count per retailer), and if the user wants to filter to just that retailer they can click to filter.
-
-The consumer can also press "Inspire Me" and a random keyword will be chosen to provide a selection of different products.
+The search query will return 6 results at a time and an infinite scroll javascript plugin handles fetching the next paginated set of product cards for that search term. In addition to the search results, the ACS response contains a facet result list based on the retailers that carry those products. These are displayed on the left hand side (including a result count per retailer), and if the consumer wants to filter to just that retailer they can click to filter. Finally, the consumer can also press "Inspire Me" and a random keyword will be chosen to provide a selection of different products.
 
 ## Tweaking the algorithm
 
 After some initial testing we noticed some discrepencies in the results. The problem was that some retailers provided extremely verbose product descriptions which might repeat a search term multiple times, while another retailer with a more relevant product might only mention the term once in the product title.
 
-For example, if a user searched for "ACME Phone" you might have 2 different products at 2 different retailers. The 1st product is more relevant, where as the second will get a better hit-rate based on keyword prevalence.
+For example, if a consumer searched for "ACME Phone" you might have 2 different products at 2 different retailers. The 1st product is more relevant, whereas the second will get a better hit-rate based on keyword prevalence.
 
 | Retailer    | Name | Tags | Description  |
 |:------------|:-----------|:------------|:------------------------------------------|
@@ -131,7 +127,7 @@ We wanted to get some very lightweight metrics on two things initially.
 1. What are people searching for?
 2. What are people clicking on?
 
-To achieve this, we created a very lightweight click handler in the app that performs the 302 redirect to the retailer site. Every product is assigned a GUID formed from a MD5_HASH of it's product URL as it's ingested into the system. This allows us to both confirm uniqueness for UPSERTS but also quickly retrieve the cosmos document from the click handler and redirect the user to the product details page URL.
+To achieve this, we created a very lightweight click handler in the app that performs the 302 redirect to the retailer site. Every product is assigned a GUID formed from a MD5_HASH of it's product URL as it's ingested into the system. This allows us to both confirm uniqueness for UPSERTS but also quickly retrieve the cosmos document from the click handler and redirect the consumer to the product details page URL.
 
 ```csharp
 var result = await _cosmosService.GetItemAsync(retailer, productId);
@@ -156,6 +152,8 @@ return null;
 
 The statistics themselves are then persisted directly to App Insights using the Application Insights SDK as customEvents with a Dictionary of meta data attached.. This is a nice quick solution (ignoring the default 90-day data retention issue) as it allows us to write some quick kusto queries to see how things are performing.
 
+We've also added App Insights and Google Analytics to the front end to capture generic usage information as well.
+
 ```text
 customEvents
 | where timestamp > ago (8h)
@@ -169,6 +167,22 @@ customEvents
 ## Some outstanding bugbears
 
 One this which is still causing some head-aches is the ability to use Fuzzy Search. Azure Cognitive Services support the Lucene Query syntax. It should be possible to use keyword modifiers like `~` to specify fuzzy matching on certain words. This however led to spurious results. While beneficial for searches like `tshirt~` to find resutls for `t-shirt`, it caused much poorer results for mis-spellings or keywords that clearly weren't covered by any retailer. `hurling~` led to hits for `halflinger` horse related products, and attempting to supply numeric modifiers like `hurling~1` tanked the results entirely.
+
+## The //TODO List
+
+These type of hackathon projects are great. They really highlight how quickly you can get *something* live. But they also quickly highlight why doing things right in a maintainable fashion is important. Right now this solution is missing a lot of "little" things which when combined together add up to a far more mature solution. We'll see how things go over the coming days and weeks and maybe if it gets some traction, we'll revisist to look at the following.
+
+- Add CI/CD and a build/release pipeline to automate the deployment
+- Setup a non-production environment for testing
+- Add support for Soft-Deletion to Cosmos & ACS
+- Add support for selective re-running of specific retailers
+- Move the ETL Console Tool -> Azure Functions
+- Make the Search a little more robust and forgiving to spelling mistakes/relevancy issues
+- Add additional horizontally scalable instances
+- Swap out the free 90 day SSL for a WildCard SSL Cert (or better a LetsEncrypt config)
+- Add App Insights Continuous Export + Stream Analytics to get Click/Search data into our Synapse environment
+- Migrate the web app from .NET Framework + MVC5 => .NET Core + MVC6
+- Migrate the static content to Blob Storage
 
 ## New Tech is Fun
 
