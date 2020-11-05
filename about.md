@@ -7,7 +7,7 @@ share: true
 ---
 # About Me
 
-By day, I’m Senior Technical Architect for [ChannelSight][channelsight], a advertising technology company based in Dublin, Ireland.
+By day, I’m Senior Technical Architect for [ChannelSight][channelsight], a e-commerce technology company based in Dublin, Ireland.
 
 This blog is somewhere I can scribble my musings on Coding, Software Development, Design, Architecture, Maths, Puzzles and other things that makes my brain tick.
 
