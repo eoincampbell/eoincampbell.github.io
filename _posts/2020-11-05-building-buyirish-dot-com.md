@@ -20,7 +20,7 @@ image:
     feature: buyirish.png
 ---
 
-Over the past few days myself & a few colleagues have been chipping away at a little hackathon project to try and help drive consumers towards Irish retailers in the run into Xmas. The premis was simple. Could we use our existing knowledge and capabilities around product data acquistion and web crawling/scraping and create a search engine/aggregator site to allow a consumer to search for products and gift ideas (incl. price & availability) across lots of Irish retailers and product categories?
+Over the past few days myself & a few colleagues have been chipping away at a little hackathon project to try and help drive consumers towards Irish retailers in the run into Xmas. The premise was simple. Could we use our existing knowledge and capabilities around product data acquisition and web crawling/scraping and create a search engine/aggregator site to allow a consumer to search for products and gift ideas (incl. price & availability) across lots of Irish retailers and product categories?
 
 The result... [https://buyirish.com][buyirish-url]
 
@@ -89,15 +89,15 @@ public async Task BulkTest(IEnumerable<Item> items)
 
 ## Creating an Azure Cognitive Services Index
 
-With the data safely in Cosmos, next we set about setting up the Azure Cognitive Services instance. Configuring this was a breeze. You can create a new instance directly from the CosmosDB Resource, [and there's a walkthrough wizard to get the indexer setup using an hourly high-watermark check on the `_ts` timestamp][azure-cognitive-search-setup]
+With the data safely in Cosmos, next we set about setting up the Azure Cognitive Services instance. Configuring this was a breeze. You can create a new instance directly from the CosmosDB Resource, [and there's a walk-through wizard to get the indexer setup using an hourly high-watermark check on the `_ts` timestamp][azure-cognitive-search-setup]
 
 One thing that took a little bit of trial and error was the composition of the index in terms of what should be retrievable, searchable, orderable and facetable. More than once, we had to purge/drop and recreate the index as once it's created you can't modify the configuration. This is very manageable with a small initial dataset of a few hundred thousand products but I can imagine this would be slightly more work in production where we have ~10^7 product updates happening every day.
 
-It's worth mentioning that a number of my friends also recommended ElasticSearch as an alternative to ACS. It's definintely on the bucket list to read up on, and one feature that ACS is sorely missing is the concept for [Consistently Random Results][consistent-random-results] which would have been nice in order to give a fair distribution of views to similar products across multiple retailers, or to build an "Inspire Me" function to return completely random results from a `*` search.
+It's worth mentioning that a number of my friends also recommended ElasticSearch as an alternative to ACS. It's definitely on the bucket list to read up on, and one feature that ACS is sorely missing is the concept for [Consistently Random Results][consistent-random-results] which would have been nice in order to give a fair distribution of views to similar products across multiple retailers, or to build an "Inspire Me" function to return completely random results from a `*` search.
 
 ## Serving the results
 
-While I continued to get my arms around Cosmos & ACS, my colleague Daniel was busy getting the website up and running. For simplicities sake and since it was what we're both most familiar with, the front-end was asssembled using a vanilla .NET 4.8 MVC5 project with a bootstrap themes and some custom css/js.
+While I continued to get my arms around Cosmos & ACS, my colleague Daniel was busy getting the website up and running. For simplicities sake and since it was what we're both most familiar with, the front-end was assembled using a vanilla .NET 4.8 MVC5 project with a bootstrap themes and some custom css/js.
 
 The use case is pretty simple.
 
@@ -109,7 +109,7 @@ The search query will return 6 results at a time and an infinite scroll javascri
 
 ## Tweaking the algorithm
 
-After some initial testing we noticed some discrepencies in the results. The problem was that some retailers provided extremely verbose product descriptions which might repeat a search term multiple times, while another retailer with a more relevant product might only mention the term once in the product title.
+After some initial testing we noticed some discrepancies in the results. The problem was that some retailers provided extremely verbose product descriptions which might repeat a search term multiple times, while another retailer with a more relevant product might only mention the term once in the product title.
 
 For example, if a consumer searched for "ACME Phone" you might have 2 different products at 2 different retailers. The 1st product is more relevant, whereas the second will get a better hit-rate based on keyword prevalence.
 
@@ -166,11 +166,11 @@ customEvents
 
 ## Some outstanding bugbears
 
-One this which is still causing some head-aches is the ability to use Fuzzy Search. Azure Cognitive Services support the Lucene Query syntax. It should be possible to use keyword modifiers like `~` to specify fuzzy matching on certain words. This however led to spurious results. While beneficial for searches like `tshirt~` to find resutls for `t-shirt`, it caused much poorer results for mis-spellings or keywords that clearly weren't covered by any retailer. `hurling~` led to hits for `halflinger` horse related products, and attempting to supply numeric modifiers like `hurling~1` tanked the results entirely.
+One this which is still causing some head-aches is the ability to use Fuzzy Search. Azure Cognitive Services support the Lucene Query syntax. It should be possible to use keyword modifiers like `~` to specify fuzzy matching on certain words. This however led to spurious results. While beneficial for searches like `tshirt~` to find results for `t-shirt`, it caused much poorer results for mis-spellings or keywords that clearly weren't covered by any retailer. `hurling~` led to hits for `halflinger` horse related products, and attempting to supply numeric modifiers like `hurling~1` tanked the results entirely.
 
 ## The //TODO List
 
-These type of hackathon projects are great. They really highlight how quickly you can get *something* live. But they also quickly highlight why doing things right in a maintainable fashion is important. Right now this solution is missing a lot of "little" things which when combined together add up to a far more mature solution. We'll see how things go over the coming days and weeks and maybe if it gets some traction, we'll revisist to look at the following.
+These type of hackathon projects are great. They really highlight how quickly you can get *something* live. But they also quickly highlight why doing things right in a maintainable fashion is important. Right now this solution is missing a lot of "little" things which when combined together add up to a far more mature solution. We'll see how things go over the coming days and weeks and maybe if it gets some traction, we'll revisit to look at the following.
 
 - Add CI/CD and a build/release pipeline to automate the deployment
 - Setup a non-production environment for testing
