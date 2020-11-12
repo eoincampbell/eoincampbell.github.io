@@ -5,7 +5,8 @@ comments: false
 float_share: true
 share: true
 ---
-# About Me
+
+## About Me
 
 By day, I’m Senior Technical Architect for [ChannelSight][channelsight], a e-commerce technology company based in Dublin, Ireland.
 
